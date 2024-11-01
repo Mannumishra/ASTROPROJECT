@@ -16,7 +16,7 @@ const Home = () => {
   const [day, setDay] = useState([])
   const getDayData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-day")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-day")
       setDay(res.data.data[0])
     } catch (error) {
       console.log(error)
@@ -26,7 +26,7 @@ const Home = () => {
   const [month, setMonth] = useState([])
   const getMonthData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-month")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-month")
       // console.log(res)
       setMonth(res.data.data[0])
     } catch (error) {
@@ -38,7 +38,7 @@ const Home = () => {
   const [samvat, setSamvat] = useState([])
   const getSamvatData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-samvat")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-samvat")
       // console.log(res)
       setSamvat(res.data.data[0])
     } catch (error) {
@@ -84,7 +84,7 @@ const Home = () => {
 
   const getServiceData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-service")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service")
       const reverseData = res.data.data
       setServices(reverseData.reverse())
     } catch (error) {
@@ -99,7 +99,7 @@ const Home = () => {
   const [blog, setBlog] = useState([])
   const getBlogData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-blog")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-blog")
       setBlog(res.data.data)
       // console.log(res)
     } catch (error) {
@@ -114,7 +114,7 @@ const Home = () => {
   const [posts, setPosts] = useState([])
   const getPostData = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/get-all-vedio")
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-all-vedio")
       console.log(res)
       setPosts(res.data.data)
     } catch (error) {
@@ -328,7 +328,7 @@ const Home = () => {
                           <div className="news">
                             <h5 className="card-title py-2">What's the news?</h5>
                             <img
-                              src={`http://localhost:8000/${item.blogImage}`}
+                              src={`https://www.api.vedicjyotishe.com/${item.blogImage}`}
                               className="card-img-top"
                               alt="news"
                             />
@@ -409,7 +409,7 @@ const Home = () => {
                               <img
                                 data-aos="fade-up"
                                 data-aos-duration="2000"
-                                src={`http://localhost:8000/${service.serviceLogo}`}
+                                src={`https://www.api.vedicjyotishe.com/${service.serviceLogo}`}
                                 alt={service.title}
                                 className="img-fluid mb-2"
                                 style={{ height: "80px" }}

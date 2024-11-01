@@ -10,7 +10,7 @@ const AllSamvat = () => {
 
     const getApiData = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/get-samvat");
+            const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-samvat");
             if (res.status === 200) {
                 setData(res.data.data);
             }
@@ -36,7 +36,7 @@ const AllSamvat = () => {
             });
 
             if (result.isConfirmed) {
-                const res = await axios.delete(`http://localhost:8000/api/delete-samvat/${id}`);
+                const res = await axios.delete(`https://www.api.vedicjyotishe.com/api/delete-samvat/${id}`);
                 if (res.status === 200) {
                     getApiData();
                     toast.success("Record deleted successfully");

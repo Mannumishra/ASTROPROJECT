@@ -39,7 +39,7 @@ const AddDay = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8000/api/create-day', formattedData);
+            const response = await axios.post('https://www.api.vedicjyotishe.com/api/create-day', formattedData);
             if (response.status === 200) {
                 toast.success(response.data.message);
                 navigate("/all-panchang");

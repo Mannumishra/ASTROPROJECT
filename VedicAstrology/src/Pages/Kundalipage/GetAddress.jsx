@@ -36,7 +36,7 @@
 
 //   const getApiData = async () => {
 //     try {
-//       const res = await axios.get("http://localhost:8000/api/get-service-by-name/" + name);
+//       const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service-by-name/" + name);
 //       console.log(res);
 //       setData(res.data.data);
 //     } catch (error) {
@@ -73,7 +73,7 @@
 //     e.preventDefault();
 //     try {
 //       // Post the form data to your API
-//       const res = await axios.post("http://localhost:8000/api/submit-kundali", formData);
+//       const res = await axios.post("https://www.api.vedicjyotishe.com/api/submit-kundali", formData);
 //       console.log(res.data);
 //       setSubmissionStatus("Form submitted successfully!"); // Success message
 //       // Reset form or handle further logic if needed
@@ -148,7 +148,7 @@
 //             <div className="row">
 //               <div className="col-md-5">
 //                 <div className="kundaliganesh">
-//                   <img src={`http://localhost:8000/${data.serviceImage}`} alt="KundaliGanesh" />
+//                   <img src={`https://www.api.vedicjyotishe.com/${data.serviceImage}`} alt="KundaliGanesh" />
 //                 </div>
 //               </div>
 

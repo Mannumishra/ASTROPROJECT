@@ -24,7 +24,7 @@ const EditService = () => {
     useEffect(() => {
         const fetchServiceData = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/get-single-service/${id}`);
+                const response = await axios.get(`https://www.api.vedicjyotishe.com/api/get-single-service/${id}`);
                 const service = response.data.data; // Assuming the response structure
                 setFormData({
                     serviceName: service.serviceName,
@@ -85,7 +85,7 @@ const EditService = () => {
         });
 
         try {
-            const response = await axios.put(`http://localhost:8000/api/update-service/${id}`, data, {
+            const response = await axios.put(`https://www.api.vedicjyotishe.com/api/update-service/${id}`, data, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             if (response.status === 200) {
