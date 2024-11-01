@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route,Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 import Header from '../Header/Header'
 import Dashboard from '../../Pages/Dashboard/Dashboard'
@@ -25,65 +25,66 @@ import AllService from '../../Pages/Service/AllService'
 import AddService from '../../Pages/Service/AddService'
 import EditService from '../../Pages/Service/EditService'
 import Panchang from '../../Pages/Panchange/Panchang'
+import Login from '../auth/Login'
 
 const Home = () => {
+  const isLoggedIn = sessionStorage.getItem("login");
   return (
     <>
-    
-      <Header/>
-      <div className="rightside">
-        <Routes>
-          <Route path={"/dashboard"} element={<Dashboard/>}/>
+      {
+        isLoggedIn ? (
+          <>
+            <Header />
+            <div className="rightside">
+              <Routes>
+                <Route path={"/dashboard"} element={<Dashboard />} />
 
-          <Route path={"/all-panchang"} element={<Panchang/>}/>
+                <Route path={"/all-panchang"} element={<Panchang />} />
 
-          {/* Category --  */}
-          <Route path={"/all-day"} element={<AllDay/>}/>
-          <Route path={"/add-day"} element={<AddDay/>}/>
-          <Route path={"/edit-day/:id"} element={<EditDay/>}/>
+                {/* Category --  */}
+                <Route path={"/all-day"} element={<AllDay />} />
+                <Route path={"/add-day"} element={<AddDay />} />
+                <Route path={"/edit-day/:id"} element={<EditDay />} />
 
-          {/* Product --  */}
-          <Route path={"/all-samvat"} element={<AllSamvat/>}/>
-          <Route path={"/add-samvat"} element={<AddSamvat/>}/>
-          <Route path={"/edit-samvat/:id"} element={<EditSamvat/>}/>
-
-          
-          {/* --- Orders --- */}
-          <Route path={"/all-users"} element={<AllUsers/>}/>
-
-          {/* --- Vouchers --- */}
-          <Route path={"/all-service"} element={<AllService/>}/>   {/* // All Vouchers */}
-          <Route path={"/add-service"} element={<AddService/>}/>
-          <Route path={"/edit-service/:id"} element={<EditService/>}/>
-
-          {/* --- Tags --- */}
-          <Route path={"/all-blogs"} element={<AllBlog/>}/>
-          <Route path={"/add-blog"} element={<AddBlog/>}/>
-          <Route path={"/edit-blog/:id"} element={<EditBlog/>}/>
-
-          {/* --- Banners --- */}
-          <Route path={"/all-months"} element={<AllMonths/>}/>
-          <Route path={"/add-month"} element={<AddMonths/>}/>
-          <Route path={"/edit-month/:id"} element={<EditMonth/>}/>
-
-          {/* --- Banners --- */}
-          <Route path={"/all-social-media"} element={<AllSocialMedia/>}/>
-          <Route path={"/add-social-media"} element={<AddSocialMedia/>}/>
-          <Route path={"/edit-social-media/:id"} element={<EditSocialMedia/>}/>
-
-          {/* --- Orders --- */}
-          <Route path={"/all-orders"} element={<AllOrder/>}/>
-          <Route path={"/edit-order/:id"} element={<EditOrder/>}/>
-
-          
+                {/* Product --  */}
+                <Route path={"/all-samvat"} element={<AllSamvat />} />
+                <Route path={"/add-samvat"} element={<AddSamvat />} />
+                <Route path={"/edit-samvat/:id"} element={<EditSamvat />} />
 
 
+                {/* --- Orders --- */}
+                <Route path={"/all-users"} element={<AllUsers />} />
 
-{/* all-shop */}
+                {/* --- Vouchers --- */}
+                <Route path={"/all-service"} element={<AllService />} />   {/* // All Vouchers */}
+                <Route path={"/add-service"} element={<AddService />} />
+                <Route path={"/edit-service/:id"} element={<EditService />} />
 
-        </Routes>
-      </div>
+                {/* --- Tags --- */}
+                <Route path={"/all-blogs"} element={<AllBlog />} />
+                <Route path={"/add-blog"} element={<AddBlog />} />
+                <Route path={"/edit-blog/:id"} element={<EditBlog />} />
 
+                {/* --- Banners --- */}
+                <Route path={"/all-months"} element={<AllMonths />} />
+                <Route path={"/add-month"} element={<AddMonths />} />
+                <Route path={"/edit-month/:id"} element={<EditMonth />} />
+
+                {/* --- Banners --- */}
+                <Route path={"/all-social-media"} element={<AllSocialMedia />} />
+                <Route path={"/add-social-media"} element={<AddSocialMedia />} />
+                <Route path={"/edit-social-media/:id"} element={<EditSocialMedia />} />
+
+                {/* --- Orders --- */}
+                <Route path={"/all-orders"} element={<AllOrder />} />
+                <Route path={"/edit-order/:id"} element={<EditOrder />} />
+
+              </Routes>
+            </div>
+
+          </>
+        ) : <Login />
+      }
     </>
   )
 }
