@@ -1,0 +1,493 @@
+import React, { useEffect, useState } from "react";
+import "./Home.css";
+import SunUp from "../../Assets/SunUp.png";
+import SunDown from "../../Assets/SunDown.png";
+import MoonUp from "../../Assets/MoonUp.png";
+import MoonDown from "../../Assets/MoonDown.png";
+import pray from "../../Assets/pray.png";
+import Servicetop from "../../Assets/Bithchart.jpg";
+import Websitebanner from "../../Assets/Websitebanner.jpg";
+import { Link } from "react-router-dom";
+import { IoMdArrowForward } from "react-icons/io";
+import AOS from "aos"; // Ensure you import AOS if you're using it
+import axios from "axios";
+
+const Home = () => {
+  const [day, setDay] = useState([])
+  const getDayData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-day")
+      setDay(res.data.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const [month, setMonth] = useState([])
+  const getMonthData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-month")
+      // console.log(res)
+      setMonth(res.data.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  const [samvat, setSamvat] = useState([])
+  const getSamvatData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-samvat")
+      // console.log(res)
+      setSamvat(res.data.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const createdAt = day.createdAt
+  const date = new Date(createdAt);
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = date.toLocaleDateString('en-GB', options);
+
+
+  // const tithiTill = month.tithiTill
+  // const mymonth = new Date(tithiTill);
+  // const formattedmonths = mymonth.toISOString().replace('T', ' ').slice(0, 19);
+
+  useEffect(() => {
+    getDayData()
+    getMonthData()
+    getSamvatData()
+  }, [day.length])
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  const [active, setActive] = useState(false);
+
+  const handleActiveChange = () => {
+    setActive(!active);
+  };
+
+
+  const [services, setServices] = useState([])
+
+  const getServiceData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-service")
+      const reverseData = res.data.data
+      setServices(reverseData.reverse())
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getServiceData()
+  }, [])
+
+  const [blog, setBlog] = useState([])
+  const getBlogData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-blog")
+      setBlog(res.data.data)
+      // console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getBlogData()
+  }, [])
+
+  const [posts, setPosts] = useState([])
+  const getPostData = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/api/get-all-vedio")
+      console.log(res)
+      setPosts(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    getPostData()
+  }, [])
+
+  // Function to transform YouTube URL to embed URL
+  const getEmbedUrl = (url) => {
+    const videoId = url.split('v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  };
+
+  return (
+    <>
+      <section>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="Bgimage">
+              <img src={Websitebanner} alt="Banner" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="marquee-container">
+              <marquee
+                behavior="scroll"
+                direction="left"
+                scrollamount="5"
+                loop="infinite"
+              >
+                Accumsan lacus vel facilisis volutpat est. Ornare suspendisse
+                sed nisl lacus sed viverra tellus in. Lobortis scelerisque
+                fermentum dui faucibus. Et odio pellentesque diam volutpat
+                commodo.
+              </marquee>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mainbg pt-4">
+        <div className="container-fluid pt-4">
+          <div className="row reverceColumn">
+            <div className="col-md-4 py-2">
+              <div className="content_title pb-2">
+                <h2>Panchang</h2>
+              </div>
+              <div className="Panchangdetail">
+                <div className="py-3 TopPanchang">
+                  <div className="panchangdate">
+                    <h2>Aaj Ka Panchang</h2>
+                    <h4>Ujjain,India</h4>
+                  </div>
+                  <div className="detailpanchangbtn">
+                    <Link onClick={handleActiveChange} to="#">
+                      Today's Panchang
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="currentdate">
+                    <hr />
+                    <span>
+                      <b>{formattedDate}</b>
+                    </span>
+                    <hr />
+                  </div>
+                </div>
+
+                {/* Time Cards Section */}
+                <div className="row text-center my-3">
+                  <div className="col-6 col-md-6 mb-3">
+                    <div className="sunrise p-3">
+                      <img
+                        src={SunUp}
+                        alt="Sunrise"
+                        className="img-fluid mb-2"
+                      />
+                      <h1>{day.sunRiseTime}</h1>
+                    </div>
+                  </div>
+                  <div className="col-6 col-md-6 mb-3">
+                    <div className="sunrise p-3">
+                      <img
+                        src={SunDown}
+                        alt="Sunset"
+                        className="img-fluid mb-2"
+                      />
+                      <h1>{day.sunsetTime}</h1>
+                    </div>
+                  </div>
+                  <div className="col-6 col-md-6 mb-3">
+                    <div className="Moonrise p-3">
+                      <img
+                        src={MoonUp}
+                        alt="Moonrise"
+                        className="img-fluid mb-2"
+                      />
+                      <h1>{day.moonRiseTime}</h1>
+                    </div>
+                  </div>
+                  <div className="col-6 col-md-6 mb-3">
+                    <div className="Moonrise p-3">
+                      <img
+                        src={MoonDown}
+                        alt="Moonset"
+                        className="img-fluid mb-2"
+                      />
+                      <h1>{day.moonsetTime}</h1>
+                    </div>
+                  </div>
+                </div>
+
+                <hr className="bighr" />
+
+                {/* Panchang Details Section */}
+                <div className="row py-4 px-4 outsideborder">
+                  <div className="col-md-6 p-2">
+                    <div className="month">
+                      <p>
+                        <h4>
+                          <b>Month</b>
+                        </h4>
+                      </p>
+                      <p>
+                        Amanta: <b>{month.Amanta}</b>
+                      </p>
+                      <p>
+                        Purnimanta: <b>{month.Purnimanta}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Tithi: <b>{month.Tithi}</b>
+                      </p>
+                      <p>
+                        Till: <b>{month.TithiTill}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Yog: <b>{month.Yog}</b>
+                      </p>
+                      <p>
+                        Till: <b>{month.YogTill}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Var: <b>Shanivar</b>
+                      </p>
+
+                    </div>
+                  </div>
+                  <div className="col-md-6 p-2">
+                    <div className="month">
+                      <p>
+                        <h4>
+                          {" "}
+                          <b>Samvat</b>{" "}
+                        </h4>
+                      </p>
+
+                      <p>
+                        Vikram: <b>{samvat.Vikram}</b>
+                      </p>
+                      <p>
+                        Shaka: <b>{samvat.Shaka}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Nakshatra: <b>{samvat.Nakshatra}</b>
+                      </p>
+                      <p>
+                        Till: <b>{samvat.NakshatraTill}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Karan: <b>{samvat.Karan}</b>
+                      </p>
+                      <p>
+                        Till: <b>{samvat.KaranTill}</b>
+                      </p>
+                      <hr />
+                      <p>
+                        Rahu Kalam: <b>12:50 am to 12:13 pm</b>
+                      </p>
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* News & Articles Section */}
+              <section>
+                <div className="container-fluid py-3">
+                  <div className="content_title pb-2">
+                    <h2>News & Articles</h2>
+                  </div>
+                  <div className="row Panchangdetail">
+                    {
+                      blog.map((item, index) =>
+                        <div className="col-md-6 mb-4">
+                          <div className="news">
+                            <h5 className="card-title py-2">What's the news?</h5>
+                            <img
+                              src={`http://localhost:8000/${item.blogImage}`}
+                              className="card-img-top"
+                              alt="news"
+                            />
+                            <div className="card-body">
+                              <p className="card-text">
+                                {item.blogHeading}
+                              </p>
+                              <p className="card-description">
+                                {item.blogDetails}
+                              </p>
+                              <Link
+                                onClick={handleActiveChange}
+                                to={"/"}
+                                className="btn btn-primary"
+                              >
+                                View Details
+                              </Link>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      )
+                    }
+                  </div>
+                  <Link
+                    onClick={handleActiveChange}
+                    to={"/blog"}
+                    className="card-link text-center"
+                  >
+                    View all News and Events
+                  </Link>
+                </div>
+              </section>
+            </div>
+
+            <div className="col-md-8">
+              <div className="service_title">
+                <h2>Our Services</h2>
+              </div>
+
+              <div className="container">
+                <div className="row">
+                  <div className="serviceContainer pt-4">
+                    <div className="hinditext">
+                      <div className="closehand">
+                        <img src={pray} alt="Pray Hand" />
+                        <p>लोकाः समस्ताः सुखिनो भवन्तु</p>
+                      </div>
+                    </div>
+                    <div className="topbanner mt-3">
+                      <div className="bannerimg">
+                        <img src={Servicetop} alt="Panchang img" />
+                      </div>
+                      <div className="topbannerText">
+                        <p>
+                          Order Hard Copy of Kundali (Birth Chart) for
+                          convenient reference, personal keepsake, detailed
+                          layout and easy annotations ₹1100
+                        </p>
+                      </div>
+
+                      <div className="arrowrender">
+                        <Link
+                          onClick={handleActiveChange}
+                          to={"/Kundali"}
+                          className="render"
+                        >
+                          <IoMdArrowForward className="Arrow" />
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="container pt-5">
+                      <div className="row">
+                        {services.map((service, index) => (
+                          <div key={index} className="col-md-4 col-6 mt-3 mb-4">
+                            <div className="text-center">
+                              <img
+                                data-aos="fade-up"
+                                data-aos-duration="2000"
+                                src={`http://localhost:8000/${service.serviceLogo}`}
+                                alt={service.title}
+                                className="img-fluid mb-2"
+                                style={{ height: "80px" }}
+                              />
+                              <h5>{service.serviceName}</h5>
+                              <p>
+                                <span className="text-muted">
+                                  <s>₹{service.sericePrice}</s>
+                                </span>{" "}
+                                &nbsp;
+                                <span className="text-danger">
+                                  ₹{service.sericeFinalPrice}
+                                </span>
+                              </p>
+                              <Link to={`Service-Details/${service.serviceName}`}>
+                                <button className="servicedetails">Get Details</button>
+                              </Link>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="ViewServicebtn pb-3">
+                  <Link to="/OurServices">
+                    <button className="ViewAllbtn">View All</button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <section>
+                <div className="container-fluid mt-5">
+                  <div className="content_title">
+                    <h2>Social Media Feed</h2>
+                  </div>
+                  <div className="videodetail">
+                    <div className="row row-cols-1 row-cols-md-4 g-2">
+                      {posts.map((post, index) => (
+                        <div className="col" key={index}>
+                          <div className="Videocard">
+                            <div className="video-container">
+                              <iframe
+                                width="430"
+                                height="300"
+                                src={getEmbedUrl(post.link)}
+                                title={post.contentHeading}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              ></iframe>
+                            </div>
+                            <div className="card-body">
+                              <h5 className="card-title">
+                                {post.contentHeading}
+                              </h5>
+                              <p className="card-text pt-1">
+                                {post.contentDetails}
+                              </p>
+
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Home;
