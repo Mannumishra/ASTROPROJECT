@@ -1,16 +1,17 @@
 const Service = require("../Models/ServiceModel");
-const fs = require("fs");
+const fs = require("fs").promises;
+const path = require("path");
 
-const deleteFile = (filePath) => {
-    if (fs.existsSync(filePath)) {
-        try {
-            fs.unlinkSync(filePath);
-            console.log(`Deleted file: ${filePath}`);
-        } catch (deleteError) {
-            console.error(`Failed to delete file ${filePath}:`, deleteError);
+const deleteFile = async (filePath) => {
+    try {
+        if (filePath) {
+            const fileToDelete = path.join(__dirname, "..", filePath);
+            await fs.access(fileToDelete); 
+            await fs.unlink(fileToDelete); 
+            console.log("Deleted file:", filePath);
         }
-    } else {
-        console.warn(`File not found, unable to delete: ${filePath}`);
+    } catch (err) {
+        console.log("File not found or already deleted:", filePath);
     }
 };
 
@@ -236,6 +237,10 @@ const updateService = async (req, res) => {
         });
     } catch (error) {
         console.error("An error occurred while updating the service:", error);
+        if (req.files) {
+            if (req.files.serviceLogo) await fs.unlink(req.files.serviceLogo[0].path);
+            if (req.files.serviceImage) await fs.unlink(req.files.serviceImage[0].path);
+        }
         res.status(500).json({
             success: false,
             message: "Internal Server Error"
