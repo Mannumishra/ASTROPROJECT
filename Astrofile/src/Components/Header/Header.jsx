@@ -70,7 +70,7 @@ const Header = () => {
 
       <section>
         <nav className="navbar navbar-expand-lg">
-          <div className="container-fluid">
+          <div className="container-fluid myself">
             <div className="navbar-brand p-0">
               <Link onClick={() => handleLinkClick("/")} to="/">
                 <img src={brandlogo} alt="Vedic Jyotishe" className="navbar-logo" />
@@ -81,51 +81,53 @@ const Header = () => {
               <IoMenu className="menu" />
             </div>
 
-            <ul className={`nav-links ${isNavbarOpen ? "active" : ""}`}>
-              <li className={`nav-link ${activeLink === "/" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/")} className="nav-item-link" to="/">Home</Link>
-              </li>
-              <li className={`nav-link ${activeLink === "/About" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/About")} className="nav-item-link" to="/About">About</Link>
-              </li>
-              <li className="dropdown nav-link">
-                <Link to="#" className="nav-item-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Services
-                </Link>
-                <ul className="dropdown-menu">
-                  {
-                    service.map((item, index) =>
-                      <li className="dropdown-item">
-                        <Link to={`Service-Details/${item.serviceName}`}>{item.serviceName}</Link>
-                      </li>
-                    )
-                  }
-                  <li className="dropdown-item">
-                    <Link onClick={() => handleLinkClick("/OurServices")} to="/OurServices">More Services...</Link>
-                  </li>
-                </ul>
-              </li>
-              <li className={`nav-link ${activeLink === "/Blog" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/Blog")} className="nav-item-link" to="/Blog">Blog</Link>
-              </li>
-              <li className={`nav-link ${activeLink === "/Contact" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/Contact")} className="nav-item-link" to="/Contact">Contact</Link>
-              </li>
-              <li className={`nav-link ${activeLink === "/Socialfeed" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/Socialfeed")} className="nav-item-link" to="/Socialfeed">Social Feed</Link>
-              </li>
-              <li className="chat-now-button">
-                {/* <div className="btnposition"> */}
-                <a
-                  href="https://wa.me/916366052167"
-                  target="_blank"
-                  className="text-light"
-                >
-                  CHAT NOW
-                </a>
-                {/* </div> */}
-              </li>
-            </ul>
+            <div>
+              <ul className={`nav-links ${isNavbarOpen ? "active" : ""}`}>
+                <li className={`nav-link ${activeLink === "/" ? "active" : ""}`}>
+                  <Link onClick={() => handleLinkClick("/")} className="nav-item-link" to="/">Home</Link>
+                </li>
+                <li className={`nav-link ${activeLink === "/About" ? "active" : ""}`}>
+                  <Link onClick={() => handleLinkClick("/About")} className="nav-item-link" to="/About">About</Link>
+                </li>
+                <li className="dropdown nav-link">
+                  <Link to="#" className="nav-item-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Services
+                  </Link>
+                  <ul className="dropdown-menu">
+                    {
+                      service.map((item, index) =>
+                        <li className="dropdown-item">
+                          <Link to={`Service-Details/${item.serviceName}`}>{item.serviceName}</Link>
+                        </li>
+                      )
+                    }
+                    <li className="dropdown-item">
+                      <Link onClick={() => handleLinkClick("/OurServices")} to="/OurServices">More Services...</Link>
+                    </li>
+                  </ul>
+                </li>
+                <li className={`nav-link ${activeLink === "/Blog" ? "active" : ""}`}>
+                  <Link onClick={() => handleLinkClick("/Blog")} className="nav-item-link" to="/Blog">Blog</Link>
+                </li>
+                <li className={`nav-link ${activeLink === "/Contact" ? "active" : ""}`}>
+                  <Link onClick={() => handleLinkClick("/Contact")} className="nav-item-link" to="/Contact">Contact</Link>
+                </li>
+                <li className={`nav-link ${activeLink === "/Socialfeed" ? "active" : ""}`}>
+                  <Link onClick={() => handleLinkClick("/Socialfeed")} className="nav-item-link" to="/Socialfeed">Social Feed</Link>
+                </li>
+                <li className="chat-now-button">
+                  {/* <div className="btnposition"> */}
+                  <a
+                    href="https://wa.me/916366052167"
+                    target="_blank"
+                    className="text-light"
+                  >
+                    CHAT NOW
+                  </a>
+                  {/* </div> */}
+                </li>
+              </ul>
+            </div>
           </div>
         </nav>
       </section >

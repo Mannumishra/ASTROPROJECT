@@ -75,7 +75,7 @@ const Footer = () => {
                     <div className="callnumber">
                       <p>Phone</p>
                       <a href="tel:+916366052167" target="_blank">
-                        <h3>+91 6366052167</h3>
+                        <h5>+91 6366052167</h5>
                       </a>
                     </div>
                   </div>
@@ -86,7 +86,7 @@ const Footer = () => {
                     <div className="mailid">
                       <p>Email id</p>
                       <a href="mailto:VedicJyotishe@outlook.com" target="_blank">
-                        <h3> VedicJyotishe@outlook.com</h3>
+                        <h5> VedicJyotishe@outlook.com</h5>
                       </a>
                     </div>
                   </div>
