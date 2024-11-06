@@ -70,7 +70,7 @@ const Header = () => {
 
       <section>
         <nav className="navbar navbar-expand-lg">
-          <div className="container-fluid myself">
+          <div className="container-fluid ">
             <div className="navbar-brand p-0">
               <Link onClick={() => handleLinkClick("/")} to="/">
                 <img src={brandlogo} alt="Vedic Jyotishe" className="navbar-logo" />
@@ -81,7 +81,7 @@ const Header = () => {
               <IoMenu className="menu" />
             </div>
 
-            <div>
+            {/* <div> */}
               <ul className={`nav-links ${isNavbarOpen ? "active" : ""}`}>
                 <li className={`nav-link ${activeLink === "/" ? "active" : ""}`}>
                   <Link onClick={() => handleLinkClick("/")} className="nav-item-link" to="/">Home</Link>
@@ -127,7 +127,7 @@ const Header = () => {
                   {/* </div> */}
                 </li>
               </ul>
-            </div>
+            {/* </div> */}
           </div>
         </nav>
       </section >

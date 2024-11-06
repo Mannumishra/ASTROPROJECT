@@ -12,7 +12,7 @@
 }
 .myself{
   display: flex;
-  justify-content: space-between !important;
+  justify-content: space-between;
 }
 
 .talk a,
