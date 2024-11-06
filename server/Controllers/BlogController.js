@@ -106,8 +106,8 @@ const deleteBlog = async (req, res) => {
             })
         }
         // इमेज का सही पथ बनाएँ
-        const deleteImagePath = path.join(__dirname, "../Public", data.blogImage);
-        console.log("Deleting image att path:", deleteImagePath);
+        const deleteImagePath = path.join(__dirname, "..", data.blogImage.replace(/^Public[\\/]/, ""));
+        console.log("Deleting image at path:", deleteImagePath);
         try {
             await fs.access(deleteImagePath);
             await fs.unlink(deleteImagePath);
