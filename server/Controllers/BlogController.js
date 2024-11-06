@@ -104,7 +104,8 @@ const deleteBlog = async (req, res) => {
                 message: "Blog Not Found"
             })
         }
-        const deleteImagePath = data.blogImage
+        const deleteImagePath = `./Public/${data.blogImage}`; // Public फ़ोल्डर का सही पथ जोड़ें
+        console.log("Deleting image at path:", deleteImagePath);
         try {
             await fs.access(deleteImagePath);
             await fs.unlink(deleteImagePath);
