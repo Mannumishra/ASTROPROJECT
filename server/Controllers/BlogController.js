@@ -163,8 +163,9 @@ const updateBlog = async (req, res) => {
         if (req.file) {
             try {
                 const deleteImagePath = path.join(__dirname, "..", blog.blogImage);
-                await fs.access(deleteImagePath);
-                await fs.unlink(deleteImagePath);
+                console.log("update image at path:", deleteImagePath);
+                await fs.access(deleteImagePath); // Ensure the file exists before attempting to delete
+                await fs.unlink(deleteImagePath); // Delete the old image file
             } catch (err) {
                 console.log("Old image does not exist or already deleted.");
             }
