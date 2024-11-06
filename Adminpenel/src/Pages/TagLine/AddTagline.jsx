@@ -30,9 +30,9 @@ const AddTagline = () => {
         }
         try {
             const response = await axios.post('https://www.api.vedicjyotishe.com/api/create-tagline', formData); // Update with correct API endpoint
-            if (response.status === 200) {
+            if (response.status === 201) {
                 toast.success("Tagline added successfully!");
-                navigate('/all-taglines'); // Redirect to all taglines page
+                navigate('/all-tagline'); // Redirect to all taglines page
             } else {
                 toast.error(response.data.message || "Failed to add tagline.");
             }
@@ -52,7 +52,7 @@ const AddTagline = () => {
                     <h4>Add Tagline</h4>
                 </div>
                 <div className="links">
-                    <Link to="/all-taglines" className="add-new">Back <i className="fa-regular fa-circle-left"></i></Link>
+                    <Link to="/all-tagline" className="add-new">Back <i className="fa-regular fa-circle-left"></i></Link>
                 </div>
             </div>
 

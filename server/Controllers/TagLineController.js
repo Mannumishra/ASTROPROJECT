@@ -1,4 +1,4 @@
-const TagLine = require('../Models/TagModel'); 
+const TagLine = require('../Models/TagModel');
 
 // Create a new TagLine
 const createTagLine = async (req, res) => {
@@ -7,7 +7,10 @@ const createTagLine = async (req, res) => {
         if (!tagLine) {
             return res.status(400).json({ message: "TagLine is required" });
         }
-
+        const countDocument =await TagLine.countDocuments()
+        if (countDocument > 0) {
+            await TagLine.deleteMany()
+        }
         const newTagLine = new TagLine({
             tagLine
         });
@@ -24,6 +27,7 @@ const createTagLine = async (req, res) => {
 const getAllTagLines = async (req, res) => {
     try {
         const tagLines = await TagLine.find();
+        console.log(tagLines)
         res.status(200).json({ message: 'TagLines fetched successfully', data: tagLines });
     } catch (error) {
         console.error(error);
@@ -35,13 +39,13 @@ const getAllTagLines = async (req, res) => {
 const getTagLineById = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         const tagLine = await TagLine.findById(id);
-        
+
         if (!tagLine) {
             return res.status(404).json({ message: 'TagLine not found' });
         }
-        
+
         res.status(200).json({ message: 'TagLine fetched successfully', data: tagLine });
     } catch (error) {
         console.error(error);
@@ -54,18 +58,18 @@ const updateTagLine = async (req, res) => {
     try {
         const { id } = req.params;
         const { tagLine } = req.body;
-        
+
         // Validate input
         if (!tagLine) {
             return res.status(400).json({ message: "TagLine is required" });
         }
 
         const updatedTagLine = await TagLine.findByIdAndUpdate(id, { tagLine }, { new: true });
-        
+
         if (!updatedTagLine) {
             return res.status(404).json({ message: 'TagLine not found' });
         }
-        
+
         res.status(200).json({ message: 'TagLine updated successfully', data: updatedTagLine });
     } catch (error) {
         console.error(error);
@@ -77,13 +81,13 @@ const updateTagLine = async (req, res) => {
 const deleteTagLine = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         const deletedTagLine = await TagLine.findByIdAndDelete(id);
-        
+
         if (!deletedTagLine) {
             return res.status(404).json({ message: 'TagLine not found' });
         }
-        
+
         res.status(200).json({ message: 'TagLine deleted successfully' });
     } catch (error) {
         console.error(error);

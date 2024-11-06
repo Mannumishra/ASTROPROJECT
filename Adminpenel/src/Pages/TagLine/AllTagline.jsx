@@ -6,15 +6,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AllTagline = () => {
-    const [socialMediaData, setSocialMediaData] = useState([]);
+    const [tagline, setTagline] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchSocialMediaData = async () => {
             try {
-                const response = await axios.get('https://www.api.vedicjyotishe.com/api/get-all-vedio');
-                if (response.data.success) {
-                    setSocialMediaData(response.data.data);
+                const response = await axios.get('https://www.api.vedicjyotishe.com/api/get-tagline');
+                console.log(response)
+                if (response.status===200) {
+                    setTagline(response.data.data);
                 } else {
                     toast.error(response.data.message || "Failed to fetch data.");
                 }
@@ -43,10 +44,10 @@ const AllTagline = () => {
         if (confirmDelete.isConfirmed) {
             try {
                 // Make your DELETE request here
-                const response = await axios.delete(`https://www.api.vedicjyotishe.com/api/delete-vedio/${id}`);
-                if (response.data.success) {
-                    toast.success("Social media link deleted successfully!");
-                    setSocialMediaData((prevData) => prevData.filter(item => item._id !== id));
+                const response = await axios.delete(`https://www.api.vedicjyotishe.com/api/delete-tagline/${id}`);
+                if (response.status===200) {
+                    toast.success("Tag Line deleted successfully!");
+                    setTagline((prevData) => prevData.filter(item => item._id !== id));
                 } else {
                     toast.error(response.data.message || "Failed to delete the link.");
                 }
@@ -56,19 +57,12 @@ const AllTagline = () => {
             }
         }
     };
-
-       // Function to transform YouTube URL to embed URL
-       const getEmbedUrl = (url) => {
-        const videoId = url.split('v=')[1]?.split('&')[0];
-        return `https://www.youtube.com/embed/${videoId}`;
-    };
-
     return (
         <>
             <ToastContainer />
             <div className="bread">
                 <div className="head">
-                    <h4>All Social Media </h4>
+                    <h4>All Tag Line </h4>
                 </div>
                 <div className="links">
                     <Link to="/add-tagline" className="add-new">Add New <i className="fa-solid fa-plus"></i></Link>
@@ -93,10 +87,7 @@ const AllTagline = () => {
                     <thead>
                         <tr>
                             <th scope="col">Sr.No.</th>
-                            <th scope="col">Video</th>
-                            <th scope="col">Content Heading</th>
-                            <th scope="col">Content Details</th>
-                            <th scope="col">Show in home page</th>
+                            <th scope="col">Tag Line</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -106,25 +97,11 @@ const AllTagline = () => {
                             <tr>
                                 <td colSpan="7" className="text-center">Loading...</td>
                             </tr>
-                        ) : socialMediaData.length > 0 ? (
-                            socialMediaData.map((item, index) => (
+                        ) : tagline.length > 0 ? (
+                            tagline.map((item, index) => (
                                 <tr key={item._id}>
                                     <th scope="row">{index + 1}</th>
-                                    <td>
-                                        <iframe
-                                            width="500"
-                                            height="200"
-                                            src={getEmbedUrl(item.link)}
-                                            title={item.contentHeading}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerPolicy="strict-origin-when-cross-origin"
-                                            allowFullScreen
-                                        ></iframe>
-                                    </td>
-                                    <td>{item.contentHeading}</td>
-                                    <td>{item.contentDetails}</td>
-                                    <td>{item.activeStatus ? 'Yes' : 'No'}</td>
+                                    <td>{item.tagLine}</td>
                                     <td>
                                         <Link to={`/edit-tagline/${item._id}`} className="bt edit">
                                             Edit <i className="fa-solid fa-pen-to-square"></i>
