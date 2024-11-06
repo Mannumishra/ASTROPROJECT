@@ -20,7 +20,6 @@ import { IoMdArrowForward } from "react-icons/io";
 import { FaAngleRight } from "react-icons/fa";
 import './OurServices.css';
 import AOS from "aos";
-import axios from "axios";
 
 const OurServices = () => {
   useEffect(() => {
@@ -39,35 +38,19 @@ const OurServices = () => {
     setActive(!active);
   };
 
-  const [services, setServices] = useState([])
-
-  const getServiceData = async () => {
-    try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service")
-      console.log(res)
-      const reverseData = res.data.data
-      setServices(reverseData.reverse())
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getServiceData()
-  }, [])
-  // const services = [
-  //   { title: "Kundali Analysis Overall with 3 areas of concern", originalPrice: "15000", discountedPrice: "11000", image: Planet },
-  //   { title: "Match - Matching", originalPrice: "25000", discountedPrice: "15000", image: Match },
-  //   { title: "Marriage Consultation", originalPrice: "25000", discountedPrice: "15000", image: Love },
-  //   { title: "Progeny/Children", originalPrice: "6000", discountedPrice: "5000", image: Children },
-  //   { title: "Education", originalPrice: "6000", discountedPrice: "5000", image: Study },
-  //   { title: "Career/Profession", originalPrice: "6000", discountedPrice: "5000", image: Carrier },
-  //   { title: "Name Correction", originalPrice: "6000", discountedPrice: "5000", image: Naamkaran },
-  //   { title: "Muhurata", originalPrice: "30000", discountedPrice: "25000", image: Muhurat },
-  //   { title: "Good/Bad Times", originalPrice: "5000", discountedPrice: "2500", image: Goodtime },
-  //   { title: "Relationship", originalPrice: "5000", discountedPrice: "2500", image: Relation },
-  //   { title: "Health", originalPrice: "5000", discountedPrice: "2500", image: Health },
-  // ];
+  const services = [
+    { title: "Kundali Analysis Overall with 3 areas of concern", originalPrice: "15000", discountedPrice: "11000", image: Planet },
+    { title: "Match - Matching", originalPrice: "25000", discountedPrice: "15000", image: Match },
+    { title: "Marriage Consultation", originalPrice: "25000", discountedPrice: "15000", image: Love },
+    { title: "Progeny/Children", originalPrice: "6000", discountedPrice: "5000", image: Children },
+    { title: "Education", originalPrice: "6000", discountedPrice: "5000", image: Study },
+    { title: "Career/Profession", originalPrice: "6000", discountedPrice: "5000", image: Carrier },
+    { title: "Name Correction", originalPrice: "6000", discountedPrice: "5000", image: Naamkaran },
+    { title: "Muhurata", originalPrice: "30000", discountedPrice: "25000", image: Muhurat },
+    { title: "Good/Bad Times", originalPrice: "5000", discountedPrice: "2500", image: Goodtime },
+    { title: "Relationship", originalPrice: "5000", discountedPrice: "2500", image: Relation },
+    { title: "Health", originalPrice: "5000", discountedPrice: "2500", image: Health },
+  ];
 
   return (
     <>
@@ -135,15 +118,15 @@ const OurServices = () => {
                       {services.map((service, index) => (
                         <div key={index} className="col-md-4 col-6 any">
                           <div className="text-center">
-                            <img data-aos="fade-up" data-aos-duration="2000" src={`https://www.api.vedicjyotishe.com/${service.serviceLogo}`} alt={service.title} className="img-fluid mb-2" style={{ height: "100px" }} />
+                            <img data-aos="fade-up" data-aos-duration="2000" src={service.image} alt={service.title} className="img-fluid mb-2" style={{ height: "100px" }} />
                             <div className="imagetitle">
-                              <h5>{service.serviceName}</h5>
+                              <h5>{service.title}</h5>
                             </div>
                             <p>
-                              <span className="text-muted"><s>₹{service.sericePrice}</s></span>{" "}
-                              <span className="text-danger">₹{service.sericeFinalPrice}</span>
+                              <span className="text-muted"><s>₹{service.originalPrice}</s></span>{" "}
+                              <span className="text-danger">₹{service.discountedPrice}</span>
                             </p>
-                            <Link to={`/Service-Details/${service.serviceName}`}>
+                            <Link to={`Service-Details/${service.serviceName}`}>
                                 <button className="servicedetails">Get Details</button>
                               </Link>
                           </div>

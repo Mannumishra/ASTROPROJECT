@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Blog.css";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Article from "../../Assets/Article.png";
 import Designstar from "../../Assets/DesignStar.png";
 import { Helmet } from "react-helmet";
 import axios from "axios";

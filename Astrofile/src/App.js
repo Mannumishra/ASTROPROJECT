@@ -13,6 +13,7 @@ import Blog from './Pages/Blog/Blog';
 import Blogdes from './Pages/BlogDes/Blogdes';
 import OurServices from './Pages/OurServices/OurServices';
 import GetAddress from './Pages/Kundalipage/GetAddress';
+import Socialfeed from './Pages/SocialFeed/Socialfeed';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/blog-details/:id" element={<Blogdes />} />
         <Route path="/OurServices" element={<OurServices />} />
         <Route path="/GetAddress" element={<GetAddress />} />
+        <Route path="/Socialfeed" element={<Socialfeed />} />
       </Routes>
     <Footer />
   </BrowserRouter>

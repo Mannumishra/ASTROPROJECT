@@ -13,54 +13,63 @@ import AOS from "aos"; // Ensure you import AOS if you're using it
 import axios from "axios";
 
 const Home = () => {
-  const [day, setDay] = useState([])
+  const [day, setDay] = useState([]);
   const getDayData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-day")
-      setDay(res.data.data[0])
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-day"
+      );
+      setDay(res.data.data[0]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const [month, setMonth] = useState([])
+  const [month, setMonth] = useState([]);
   const getMonthData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-month")
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-month"
+      );
       // console.log(res)
-      setMonth(res.data.data[0])
+      setMonth(res.data.data[0]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-
-  const [samvat, setSamvat] = useState([])
+  const [samvat, setSamvat] = useState([]);
   const getSamvatData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-samvat")
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-samvat"
+      );
       // console.log(res)
-      setSamvat(res.data.data[0])
+      setSamvat(res.data.data[0]);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
-  const createdAt = day.createdAt
+  const createdAt = day.createdAt;
   const date = new Date(createdAt);
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-GB', options);
-
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const formattedDate = date.toLocaleDateString("en-GB", options);
 
   // const tithiTill = month.tithiTill
   // const mymonth = new Date(tithiTill);
   // const formattedmonths = mymonth.toISOString().replace('T', ' ').slice(0, 19);
 
   useEffect(() => {
-    getDayData()
-    getMonthData()
-    getSamvatData()
-  }, [day.length])
+    getDayData();
+    getMonthData();
+    getSamvatData();
+  }, [day.length]);
 
   useEffect(() => {
     window.scrollTo({
@@ -79,55 +88,60 @@ const Home = () => {
     setActive(!active);
   };
 
-
-  const [services, setServices] = useState([])
+  const [services, setServices] = useState([]);
 
   const getServiceData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service")
-      const reverseData = res.data.data
-      setServices(reverseData.reverse())
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-service"
+      );
+      const reverseData = res.data.data;
+      setServices(reverseData.reverse());
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getServiceData()
-  }, [])
+    getServiceData();
+  }, []);
 
-  const [blog, setBlog] = useState([])
+  const [blog, setBlog] = useState([]);
   const getBlogData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-blog")
-      setBlog(res.data.data)
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-blog"
+      );
+      setBlog(res.data.data);
       // console.log(res)
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getBlogData()
-  }, [])
+    getBlogData();
+  }, []);
 
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
   const getPostData = async () => {
     try {
-      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-all-vedio")
-      console.log(res)
-      setPosts(res.data.data)
+      const res = await axios.get(
+        "https://www.api.vedicjyotishe.com/api/get-all-vedio"
+      );
+      console.log(res);
+      setPosts(res.data.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
-    getPostData()
-  }, [])
+    getPostData();
+  }, []);
 
   // Function to transform YouTube URL to embed URL
   const getEmbedUrl = (url) => {
-    const videoId = url.split('v=')[1]?.split('&')[0];
+    const videoId = url.split("v=")[1]?.split("&")[0];
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
@@ -153,10 +167,10 @@ const Home = () => {
                 scrollamount="5"
                 loop="infinite"
               >
-                Unlock the Power of the Cosmos 🌠 - Dive Into Your Vedic Jyotishe Journey , 
-                Your Guide to the Stars 🌟 - Navigate Life with Vedic Jyotishe Wisdom , 
-                Align with the Stars ✨ - Explore Your Destiny Through Vedic Jyotishe
-                
+                Unlock the Power of the Cosmos 🌠 - Dive Into Your Vedic
+                Jyotishe Journey , Your Guide to the Stars 🌟 - Navigate Life
+                with Vedic Jyotishe Wisdom , Align with the Stars ✨ - Explore
+                Your Destiny Through Vedic Jyotishe
               </marquee>
             </div>
           </div>
@@ -272,7 +286,6 @@ const Home = () => {
                       <p>
                         Var: <b>Shanivar</b>
                       </p>
-
                     </div>
                   </div>
                   <div className="col-md-6 p-2">
@@ -308,61 +321,10 @@ const Home = () => {
                       <p>
                         Rahu Kalam: <b>12:50 am to 12:13 pm</b>
                       </p>
-
-
                     </div>
                   </div>
                 </div>
               </div>
-
-              {/* News & Articles Section */}
-              <section>
-                <div className="container-fluid py-3">
-                  <div className="content_title pb-2">
-                    <h2>News & Articles</h2>
-                  </div>
-                  <div className="row Panchangdetail">
-                    {
-                      blog.map((item, index) =>
-                        <div className="col-md-6 mb-4">
-                          <div className="news">
-                            <h5 className="card-title py-2">What's the news?</h5>
-                            <img
-                              src={`https://www.api.vedicjyotishe.com/${item.blogImage}`}
-                              className="card-img-top"
-                              alt="news"
-                            />
-                            <div className="card-body">
-                              <p className="card-text">
-                                {item.blogHeading}
-                              </p>
-                              <p className="card-description">
-                                {item.blogDetails}
-                              </p>
-                              <Link
-                                onClick={handleActiveChange}
-                                to={"/"}
-                                className="servicedetails"
-                              >
-                                View Details
-                              </Link>
-                            </div>
-
-                          </div>
-                        </div>
-
-                      )
-                    }
-                  </div>
-                  <Link
-                    onClick={handleActiveChange}
-                    to={"/blog"}
-                    className="card-link text-center"
-                  >
-                    View all News and Events
-                  </Link>
-                </div>
-              </section>
             </div>
 
             <div className="col-md-8">
@@ -424,8 +386,12 @@ const Home = () => {
                                   ₹{service.sericeFinalPrice}
                                 </span>
                               </p>
-                              <Link to={`Service-Details/${service.serviceName}`}>
-                                <button className="servicedetails">Get Details</button>
+                              <Link
+                                to={`Service-Details/${service.serviceName}`}
+                              >
+                                <button className="servicedetails">
+                                  Get Details
+                                </button>
                               </Link>
                             </div>
                           </div>
@@ -442,48 +408,114 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-12">
-              <section>
-                <div className="container-fluid mt-5">
-                  <div className="content_title">
-                    <h2>Social Media Feed</h2>
-                  </div>
-                  <div className="videodetail">
-                    <div className="row row-cols-1 row-cols-md-4 g-2">
-                      {posts.map((post, index) => (
-                        <div className="col" key={index}>
-                          <div className="Videocard">
-                            <div className="video-container">
-                              <iframe
-                                width="430"
-                                height="300"
-                                src={getEmbedUrl(post.link)}
-                                title={post.contentHeading}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                allowFullScreen
-                              ></iframe>
-                            </div>
-                            <div className="card-body">
-                              <h5 className="card-title">
-                                {post.contentHeading}
-                              </h5>
-                              <p className="card-text pt-1">
-                                {post.contentDetails}
-                              </p>
 
-                            </div>
-                          </div>
+          {/* News & Articles Section */}
+          <section>
+            <div className="container mt-3">
+              <div className="row">
+                <div className="content-title-news">
+                  <h2>News & Articles</h2>
+                </div>
+                <div className="row">
+                  {blog.map((item, index) => (
+                    <div className="col-md-3 col-6 mb-4">
+                      <div className="news">
+                        <h5 className="card-title py-2">What's the news?</h5>
+                        <img
+                          src={`https://www.api.vedicjyotishe.com/${item.blogImage}`}
+                          className="card-img-top"
+                          alt="news"
+                        />
+                        <div className="card-body">
+                          <p className="card-text">{item.blogHeading}</p>
+
+                          <p className="card-description">
+                            {item.blogDetails}
+                            {item.blogDetails.split(" ").slice(0, 20).join(" ")}
+                            {item.blogDetails.split(" ").length > 20 && "..."}
+                          </p>
+                          <Link
+                            onClick={handleActiveChange}
+                            to={"/"}
+                            className="servicedetails"
+                          >
+                            View Details
+                          </Link>
                         </div>
-                      ))}
+                      </div>
                     </div>
+                  ))}
+
+                  <div className="detail-blog">
+                    <Link
+                      onClick={handleActiveChange}
+                      to={"/blog"}
+                      className="detail-blog-btn"
+                    >
+                      View all News and Events
+                    </Link>
                   </div>
                 </div>
-              </section>
+              </div>
             </div>
-          </div>
+          </section>
+
+          <section>
+            <div className="container mt-5">
+              <div className="row">
+                <div className="content-title-media">
+                  <h2>Social Media Feed</h2>
+                </div>
+
+                <div className="videodetail">
+                  <div className="row">
+                    {posts.slice(0, 4).map((post, index) => (
+                      <div className="col-md-3 col-6 mb-2" key={index}>
+                        <div className="Videocard">
+                          <div className="video-container">
+                            <iframe
+                              src={getEmbedUrl(post.link)}
+                              title={post.contentHeading}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                              className="responsive-iframe"
+                            ></iframe>
+                          </div>
+                          <div className="card-body">
+                            <h5>{post.contentHeading}</h5>
+                            <p>
+                              {post.contentDetails
+                                .split(" ")
+                                .slice(0, 20)
+                                .join(" ")}
+                              {post.contentDetails.split(" ").length > 20 &&
+                                "..."}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                     {/* Show "View All" button if there are more than 4 videos */}
+                  {posts.length > 4 && (
+                   <div className="view-all-feed">
+                    <Link
+                      onClick={handleActiveChange}
+                      to={"/Socialfeed"}
+                      className="All-Feed"
+                    >
+                      View all Social Feed
+                    </Link>
+                    </div>
+                   
+                  )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </>

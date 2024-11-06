@@ -88,13 +88,28 @@
   color: var(--dark-orange);
 }
 
+.dropdown-menu {
+  background: white;
+}
+
+
+.dropdown-menu .dropdown-item a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.dropdown-menu .dropdown-item a:hover {
+  color: var(--dark-orange) !important;
+}
 
 .chat-now-button {
   background-color: var(--dark-orange);
   padding: 0.40rem 1.5rem;
   border-radius: 50px;
   transition: background-color 0.3s ease;
-  margin-left: 3rem;
+  margin-left: 2rem;
 }
 
 

@@ -72,15 +72,30 @@ const Header = () => {
               <li className={`nav-link ${activeLink === "/About" ? "active" : ""}`}>
                 <Link onClick={() => handleLinkClick("/About")} className="nav-item-link" to="/About">About</Link>
               </li>
-              <li className={`nav-link ${activeLink === "/About" ? "active" : ""}`}>
-                <Link onClick={() => handleLinkClick("/About")} className="nav-item-link" to="/OurServices">Services</Link>
+              <li className="dropdown nav-link">
+                <Link to="#" className="nav-item-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Services
+                </Link>
+                <ul className="dropdown-menu">
+                  <li className="dropdown-item">
+                    <Link onClick={() => handleLinkClick("/Kundali")} to="/Kundali">Kundli</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link onClick={() => handleLinkClick("/Question")} to="/Question">Unique Ask</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link onClick={() => handleLinkClick("/OurServices")} to="/OurServices">More Services...</Link>
+                  </li>
+                </ul>
               </li>
-              
               <li className={`nav-link ${activeLink === "/Blog" ? "active" : ""}`}>
                 <Link onClick={() => handleLinkClick("/Blog")} className="nav-item-link" to="/Blog">Blog</Link>
               </li>
               <li className={`nav-link ${activeLink === "/Contact" ? "active" : ""}`}>
                 <Link onClick={() => handleLinkClick("/Contact")} className="nav-item-link" to="/Contact">Contact</Link>
+              </li>
+              <li className={`nav-link ${activeLink === "/Socialfeed" ? "active" : ""}`}>
+                <Link onClick={() => handleLinkClick("/Socialfeed")} className="nav-item-link" to="/Socialfeed">Social Feed</Link>
               </li>
               <li className="chat-now-button">
               {/* <div className="btnposition"> */}
