@@ -67,6 +67,7 @@ const AllService = () => {
                                 <th scope="col">Service Price</th>
                                 <th scope="col">Service Logo</th>
                                 <th scope="col">Service Image</th>
+                                <th scope="col">Drop Down</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
                             </tr>
@@ -79,11 +80,12 @@ const AllService = () => {
                                     <td>{service.serviceHeading}</td>
                                     <td>&#8377;{service.sericeFinalPrice}</td>
                                     <td>
-                                        <img src={`https://www.api.vedicjyotishe.com/${service.serviceImage}`} alt={service.serviceName} style={{ width: '50px', height: '50px' }} />
-                                    </td>
-                                    <td>
                                         <img src={`https://www.api.vedicjyotishe.com/${service.serviceLogo}`} alt={service.serviceName} style={{ width: '50px', height: '50px' }} />
                                     </td>
+                                    <td>
+                                        <img src={`https://www.api.vedicjyotishe.com/${service.serviceImage}`} alt={service.serviceName} style={{ width: '50px', height: '50px' }} />
+                                    </td>
+                                    <td>{service.dropDownStatus}</td>
                                     <td>
                                         <Link to={`/edit-service/${service._id}`} className="bt edit">Edit <i className="fa-solid fa-pen-to-square"></i></Link>
                                     </td>

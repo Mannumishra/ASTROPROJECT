@@ -13,7 +13,8 @@ const AddService = () => {
         sericeDiscount: '',
         sericeFinalPrice: '',
         serviceLogo: null,
-        serviceImage: null
+        serviceImage: null,
+        dropDownStatus: 'False'  // Initialize the dropDownStatus field
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -180,6 +181,21 @@ const AddService = () => {
                             required
                         />
                     </div>
+
+                    {/* DropDownStatus Field */}
+                    <div className="col-md-4">
+                        <label className="form-label">Drop Down Status</label>
+                        <select
+                            name="dropDownStatus"
+                            className="form-control"
+                            value={formData.dropDownStatus}
+                            onChange={handleChange}
+                        >
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </div>
+
                     <div className="col-12 text-center">
                         <button type="submit" className={`btn ${isLoading ? 'btn-secondary' : 'btn-primary'}`} disabled={isLoading}>
                             {isLoading ? "Please Wait..." : "Add Service"}

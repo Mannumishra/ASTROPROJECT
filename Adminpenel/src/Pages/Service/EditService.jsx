@@ -14,7 +14,8 @@ const EditService = () => {
         sericeDiscount: '',
         sericeFinalPrice: '',
         serviceLogo: null,
-        serviceImage: null
+        serviceImage: null,
+        dropDownStatus: 'False', // Adding the dropDownStatus field
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +35,8 @@ const EditService = () => {
                     sericeDiscount: service.sericeDiscount,
                     sericeFinalPrice: service.sericeFinalPrice,
                     serviceLogo: null,
-                    serviceImage: null
+                    serviceImage: null,
+                    dropDownStatus: service.dropDownStatus || 'False', // Fetch dropDownStatus from response
                 });
             } catch (error) {
                 toast.error(error.response?.data?.message || 'Error fetching service data');
@@ -197,6 +199,18 @@ const EditService = () => {
                             className="form-control"
                             onChange={handleFileChange}
                         />
+                    </div>
+                    <div className="col-md-4">
+                        <label className="form-label">Dropdown Status</label>
+                        <select
+                            name="dropDownStatus"
+                            className="form-control"
+                            value={formData.dropDownStatus}
+                            onChange={handleChange}
+                        >
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
                     </div>
                     <div className="col-12 text-center">
                         <button type="submit" className={`btn ${isLoading ? 'btn-secondary' : 'btn-primary'}`} disabled={isLoading}>
