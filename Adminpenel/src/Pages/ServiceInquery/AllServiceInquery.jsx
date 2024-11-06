@@ -11,7 +11,7 @@ const AllServiceInquiry = () => {
 
     const getApiData = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/api/get-service-inquery");
+            const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service-inquery");
             console.log(res)
             setData(res.data.data);
         } catch (error) {
@@ -57,7 +57,7 @@ const AllServiceInquiry = () => {
             }
 
             doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-            doc.save(`Service_Inquiry_${item.orderId}.pdf`);
+            doc.save(`Service_Inquiry_${item.name}.pdf`);
             pdfContent.style.display = "none"; // Hide again after capturing
 
         } catch (error) {
