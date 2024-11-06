@@ -64,6 +64,11 @@ const Header = () => {
                 <i className="fa-brands fa-cc-discover"></i> Manage Service
               </Link>
             </li>
+            <li>
+              <Link to="/all-tagline" onClick={handletoggleBtn}>
+                <i className="fa-brands fa-cc-discover"></i> Manage TagLine
+              </Link>
+            </li>
             <button className="logout mb-5" onClick={handleLogout}>
               Log Out <i className="fa-solid fa-right-from-bracket"></i>
             </button>

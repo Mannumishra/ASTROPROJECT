@@ -26,6 +26,9 @@ import AddService from '../../Pages/Service/AddService'
 import EditService from '../../Pages/Service/EditService'
 import Panchang from '../../Pages/Panchange/Panchang'
 import Login from '../auth/Login'
+import AllTagline from '../../Pages/TagLine/AllTagline'
+import AddTagline from '../../Pages/TagLine/AddTagline'
+import EditTagline from '../../Pages/TagLine/EditTagline'
 
 const Home = () => {
   const isLoggedIn = sessionStorage.getItem("login");
@@ -74,6 +77,12 @@ const Home = () => {
                 <Route path={"/all-social-media"} element={<AllSocialMedia />} />
                 <Route path={"/add-social-media"} element={<AddSocialMedia />} />
                 <Route path={"/edit-social-media/:id"} element={<EditSocialMedia />} />
+
+                {/* --- Banners --- */}
+                <Route path={"/all-tagline"} element={<AllTagline />} />
+                <Route path={"/add-tagline"} element={<AddTagline />} />
+                <Route path={"/edit-tagline/:id"} element={<EditTagline />} />
+
 
                 {/* --- Orders --- */}
                 <Route path={"/all-orders"} element={<AllOrder />} />
