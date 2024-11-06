@@ -10,7 +10,7 @@ const razorpay = new Razorpay({
 // Create an inquiry service
 const createInqueryService = async (req, res) => {
     try {
-        // console.log(req.body)
+        console.log(req.body)
         const {
             name,
             phone,
@@ -46,8 +46,6 @@ const createInqueryService = async (req, res) => {
         if (!birthTime) errorMessage.push("birthTime is required.");
         if (!countryOrstate) errorMessage.push("Country/State is required.");
         if (!place) errorMessage.push("Place is required.");
-        if (!longitude) errorMessage.push("Longitude is required.");
-        if (!latitude) errorMessage.push("Latitude is required.");
         if (!comment) errorMessage.push("Comment are required.");
         if (!address) errorMessage.push("address is required.");
         if (!city) errorMessage.push("City is required.");
@@ -111,6 +109,7 @@ const createInqueryService = async (req, res) => {
             data: { ...newInquiry.toObject(), orderId: order.id, amount: order.amount }
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             message: "Failed to create inquiry",

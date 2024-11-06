@@ -39,11 +39,11 @@ const InqueryServiceSchema = new mongoose.Schema({
     },
     longitude: {
         type: String,
-        required: true
+        // required: true
     },
     latitude: {
         type: String,
-        required: true
+        // required: true
     },
     comment: {
         type: String,

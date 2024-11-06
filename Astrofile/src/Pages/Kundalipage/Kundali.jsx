@@ -76,6 +76,7 @@ const Kundali = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log(formData)
       const inquiryRes = await axios.post(`https://www.api.vedicjyotishe.com/api/send-service-inquery`, formData);
       const { orderId, amount } = inquiryRes.data.data;
 
@@ -317,7 +318,7 @@ const Kundali = () => {
                           <div className="row mb-3">
                             <div className="col-md-6">
                               <label htmlFor="country" className="form-label Addresslab">Country</label>
-                              <input type="text" onChange={handleChange} name="Country" className="form-control Addresscon" id="postalCode" placeholder="Country" required />
+                              <input type="text" onChange={handleChange} name="country" className="form-control Addresscon" id="postalCode" placeholder="Country" required />
                             </div>
 
                             {/* Postal Code */}

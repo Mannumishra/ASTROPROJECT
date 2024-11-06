@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import brandlogo from "../../Assets/BrandLogo.png";
 import { IoMenu } from "react-icons/io5";
 import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
+import axios from "axios"
 
 
 const Header = () => {
@@ -15,6 +16,21 @@ const Header = () => {
     setIsNavbarOpen(false); // Close the menu when a link is clicked
   };
 
+  const [service, setService] = useState([])
+
+  const getApiData = async () => {
+    try {
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-service")
+      const data = res.data.data
+      const filteData = data.filter((x) => x.dropDownStatus === "True")
+      setService(filteData)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    getApiData()
+  }, [])
   return (
     <>
       <section>
@@ -25,7 +41,7 @@ const Header = () => {
                 <h5>
                   Talk to Astrologers:{" "}
                   <a href="tel:+916366052167" target="_blank" rel="noopener noreferrer">
-                  +91 6366052167
+                    +91 6366052167
                   </a>
                 </h5>
               </div>
@@ -33,7 +49,7 @@ const Header = () => {
                 <div className="mail">
                   <h5>
                     <a href="mailto:VedicJyotishe@outlook.com" target="_blank" rel="noopener noreferrer">
-                    VedicJyotishe@outlook.com
+                      VedicJyotishe@outlook.com
                     </a>
                   </h5>
                 </div>
@@ -56,8 +72,8 @@ const Header = () => {
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">
             <div className="navbar-brand p-0">
-            <Link onClick={() => handleLinkClick("/")} to="/">
-              <img src={brandlogo} alt="Vedic Jyotishe" className="navbar-logo" />
+              <Link onClick={() => handleLinkClick("/")} to="/">
+                <img src={brandlogo} alt="Vedic Jyotishe" className="navbar-logo" />
               </Link>
             </div>
 
@@ -77,12 +93,13 @@ const Header = () => {
                   Services
                 </Link>
                 <ul className="dropdown-menu">
-                  <li className="dropdown-item">
-                    <Link onClick={() => handleLinkClick("/Kundali")} to="/Kundali">Kundli</Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link onClick={() => handleLinkClick("/Question")} to="/Question">Unique Ask</Link>
-                  </li>
+                  {
+                    service.map((item, index) =>
+                      <li className="dropdown-item">
+                        <Link to={`Service-Details/${item.serviceName}`}>{item.serviceName}</Link>
+                      </li>
+                    )
+                  }
                   <li className="dropdown-item">
                     <Link onClick={() => handleLinkClick("/OurServices")} to="/OurServices">More Services...</Link>
                   </li>
@@ -98,14 +115,20 @@ const Header = () => {
                 <Link onClick={() => handleLinkClick("/Socialfeed")} className="nav-item-link" to="/Socialfeed">Social Feed</Link>
               </li>
               <li className="chat-now-button">
-              {/* <div className="btnposition"> */}
-                <Link onClick={() => handleLinkClick("/chat")} to="/chat">CHAT NOW</Link>
+                {/* <div className="btnposition"> */}
+                <a
+                  href="https://wa.me/916366052167"
+                  target="_blank"
+                  className="text-light"
+                >
+                  CHAT NOW
+                </a>
                 {/* </div> */}
               </li>
             </ul>
           </div>
         </nav>
-      </section>
+      </section >
     </>
   );
 };

@@ -365,7 +365,7 @@ const Home = () => {
                     </div>
                     <div className="container pt-5">
                       <div className="row">
-                        {services.map((service, index) => (
+                        {services.slice(0,9).map((service, index) => (
                           <div key={index} className="col-md-4 col-6 mt-3 mb-4">
                             <div className="text-center">
                               <img
@@ -416,7 +416,7 @@ const Home = () => {
                 <div className="content-title-news">
                   <h2>News & Articles</h2>
                 </div>
-                <div className="row">
+                <div className="row p-0 m-0">
                   {blog.map((item, index) => (
                     <div className="col-md-3 col-6 mb-4">
                       <div className="news">
@@ -468,7 +468,7 @@ const Home = () => {
                 </div>
 
                 <div className="videodetail">
-                  <div className="row">
+                  <div className="row p-0 m-0">
                     {posts.slice(0, 4).map((post, index) => (
                       <div className="col-md-3 col-6 mb-2" key={index}>
                         <div className="Videocard">
