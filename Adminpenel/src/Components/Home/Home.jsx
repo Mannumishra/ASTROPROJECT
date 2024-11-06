@@ -3,8 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import Header from '../Header/Header'
 import Dashboard from '../../Pages/Dashboard/Dashboard'
-import AllOrder from '../../Pages/Orders/AllOrder'
-import EditOrder from '../../Pages/Orders/EditOrder'
+import EditOrder from '../../Pages/ServiceInquery/EditOrder'
 import AllUsers from '../../Pages/Users/AllUsers'
 import AllDay from '../../Pages/Day/AllDay'
 import AddDay from '../../Pages/Day/AddDay'
@@ -29,6 +28,7 @@ import Login from '../auth/Login'
 import AllTagline from '../../Pages/TagLine/AllTagline'
 import AddTagline from '../../Pages/TagLine/AddTagline'
 import EditTagline from '../../Pages/TagLine/EditTagline'
+import AllServiceInquery from '../../Pages/ServiceInquery/AllServiceInquery'
 
 const Home = () => {
   const isLoggedIn = sessionStorage.getItem("login");
@@ -84,8 +84,8 @@ const Home = () => {
                 <Route path={"/edit-tagline/:id"} element={<EditTagline />} />
 
 
-                {/* --- Orders --- */}
-                <Route path={"/all-orders"} element={<AllOrder />} />
+                {/* --- Serice --- */}
+                <Route path={"/all-service-query"} element={<AllServiceInquery />} />
                 <Route path={"/edit-order/:id"} element={<EditOrder />} />
 
               </Routes>

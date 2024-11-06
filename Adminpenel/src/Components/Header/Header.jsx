@@ -45,6 +45,11 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Link to="/all-service-query" onClick={handletoggleBtn}>
+                <i className="fa-brands fa-cc-discover"></i> Manage Service Query
+              </Link>
+            </li>
+            <li>
               <Link to="/all-panchang" onClick={handletoggleBtn}>
                 <i className="fa-solid fa-tag"></i> Manage Panchang
               </Link>

@@ -18,6 +18,7 @@ const Kundali = () => {
   const { name } = useParams();
 
   const [formData, setFormData] = useState({
+    serviceId:"",
     name: "",
     phone: "",
     email: "",
@@ -43,10 +44,12 @@ const Kundali = () => {
   const getApiData = async () => {
     try {
       const res = await axios.get(`https://www.api.vedicjyotishe.com/api/get-service-by-name/${name}`);
+      console.log(res)
       setData(res.data.data);
       setFormData((prevData) => ({
         ...prevData,
         amount: res.data.data.sericeFinalPrice,
+        serviceId:res.data.data._id
       }));
     } catch (error) {
       console.log(error);

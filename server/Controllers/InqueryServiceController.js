@@ -12,6 +12,7 @@ const createInqueryService = async (req, res) => {
     try {
         console.log(req.body)
         const {
+            serviceId,
             name,
             phone,
             email,
@@ -78,6 +79,7 @@ const createInqueryService = async (req, res) => {
 
         // Create new inquiry document
         const newInquiry = new InqueryService({
+            serviceId,
             name,
             phone,
             email,
@@ -122,13 +124,14 @@ const createInqueryService = async (req, res) => {
 // Get all inquiries
 const getAllInqueries = async (req, res) => {
     try {
-        const inqueries = await InqueryService.find()
+        const inqueries = await InqueryService.find().populate("serviceId")
         const reverseData = inqueries.reverse();
         res.status(200).json({
             success: true,
             data: reverseData
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             success: false,
             message: "Failed to retrieve inquiries",

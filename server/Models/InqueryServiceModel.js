@@ -1,6 +1,11 @@
 const mongoose = require("mongoose")
 
 const InqueryServiceSchema = new mongoose.Schema({
+    serviceId:{
+        type: mongoose.Schema.ObjectId,
+        ref:"Service",
+        required: true
+    },
     name: {
         type: String,
         required: true
