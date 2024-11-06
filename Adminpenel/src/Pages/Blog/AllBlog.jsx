@@ -43,6 +43,7 @@ const AllBlog = () => {
     const deleteBlog = async (id) => {
         try {
             const res = await axios.delete("https://www.api.vedicjyotishe.com/api/delete-blog/" + id)
+            console.log(res)
             if (res.status === 200) {
                 toast.success(res.data.message)
                 fetchBlogs()

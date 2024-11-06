@@ -1,5 +1,5 @@
 const Blog = require("../Models/BlogModel")
-const fs = require("fs")
+const fs = require("fs").promises
 
 
 const createBlog = async (req, res) => {
@@ -105,7 +105,12 @@ const deleteBlog = async (req, res) => {
             })
         }
         const deleteImagePath = data.blogImage
-        fs.unlinkSync(deleteImagePath)
+        try {
+            await fs.access(deleteImagePath);
+            await fs.unlink(deleteImagePath);
+        } catch (err) {
+            console.log("Image file does not exist or already deleted.");
+        }
         await data.deleteOne()
         res.status(200).json({
             success: true,
@@ -153,7 +158,12 @@ const updateBlog = async (req, res) => {
             });
         }
         if (req.file) {
-            fs.unlinkSync(blog.blogImage);
+            try {
+                await fs.access(blog.blogImage);
+                await fs.unlink(blog.blogImage);
+            } catch (err) {
+                console.log("Old image does not exist or already deleted.");
+            }
             blog.blogImage = req.file.path;
         }
         blog.blogHeading = chnageUpperCase;
