@@ -20,7 +20,7 @@ const createService = async (req, res) => {
     let serviceImagePath = null;
 
     try {
-        const { serviceName, serviceHeading, serviceDetails, sericePrice, sericeFinalPrice, sericeDiscount } = req.body;
+        const { serviceName, serviceHeading, serviceDetails, sericePrice, sericeFinalPrice, sericeDiscount ,dropDownStatus } = req.body;
         const errorMessage = [];
 
         // Validate inputs
@@ -69,6 +69,7 @@ const createService = async (req, res) => {
             sericeDiscount,
             serviceLogo: serviceLogoPath,
             serviceImage: serviceImagePath,
+            dropDownStatus: dropDownStatus || "False",
         });
 
         // Attempt to save the service
@@ -172,7 +173,7 @@ const updateService = async (req, res) => {
     let serviceLogoPath = null;
     let serviceImagePath = null;
     try {
-        const { serviceName, serviceHeading, serviceDetails, sericePrice, sericeFinalPrice, sericeDiscount } = req.body;
+        const { serviceName, serviceHeading, serviceDetails, sericePrice, sericeFinalPrice, sericeDiscount, dropDownStatus } = req.body;
         const errorMessage = [];
         if (!serviceName) errorMessage.push("Service Name is required");
         if (!serviceHeading) errorMessage.push("Service Heading is required");
@@ -215,6 +216,7 @@ const updateService = async (req, res) => {
         service.sericePrice = sericePrice || service.sericePrice;
         service.sericeFinalPrice = sericeFinalPrice || service.sericeFinalPrice;
         service.sericeDiscount = sericeDiscount || service.sericeDiscount;
+        service.dropDownStatus = dropDownStatus || service.dropDownStatus; // Update dropDownStatus if provided
 
         if (serviceLogoPath) {
             deleteFile(service.serviceLogo); // Delete the old logo

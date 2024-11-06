@@ -33,6 +33,10 @@ const serviceSchema = new mongoose.Schema({
     serviceImage: {
         type: String,
         required: true
+    },
+    dropDownStatus: {
+        type: String,
+        default: "False"
     }
 }, { timestamps: true })
 
