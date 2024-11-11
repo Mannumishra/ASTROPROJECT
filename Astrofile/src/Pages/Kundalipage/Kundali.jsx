@@ -248,7 +248,7 @@ const Kundali = () => {
                           </div>
                           <div className="col-md-12 namefield mb-2">
                             <label className="form-label">Time<sup className="text-danger">*</sup></label>
-                            <div className="d-flex " style={{marginRight:"140px"}}>
+                            <div className="d-flex " style={{ marginRight: "80px" }}>
                               {/* Hour Dropdown */}
                               <select
                                 value={hour}

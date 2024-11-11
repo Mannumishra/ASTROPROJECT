@@ -13,7 +13,7 @@ import AOS from "aos"; // Ensure you import AOS if you're using it
 import axios from "axios";
 
 const Home = () => {
-  const [arrowData ,setArrowData] = useState([])
+  const [arrowData, setArrowData] = useState([])
   const [day, setDay] = useState([]);
   const getDayData = async () => {
     try {
@@ -146,7 +146,7 @@ const Home = () => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
-  const getArrowData = async()=>{
+  const getArrowData = async () => {
     try {
       const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-kundali-service")
       setArrowData(res.data.data)
@@ -155,14 +155,14 @@ const Home = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getArrowData()
-  },[])
+  }, [])
 
 
-  const [tagline ,setTagline] = useState([])
+  const [tagline, setTagline] = useState([])
 
-  const getTagLine = async()=>{
+  const getTagLine = async () => {
     try {
       const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-tagline")
       setTagline(res.data.data[0])
@@ -171,9 +171,9 @@ const Home = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getTagLine()
-  },[])
+  }, [])
   return (
     <>
       <section>
@@ -196,7 +196,7 @@ const Home = () => {
                 scrollamount="5"
                 loop="infinite"
               >
-              {tagline.tagLine}
+                {tagline.tagLine}
               </marquee>
             </div>
           </div>
@@ -382,7 +382,7 @@ const Home = () => {
                       <div className="arrowrender">
                         <Link
                           onClick={handleActiveChange}
-                          to={`Service-Details/${arrowData.serviceName}`}
+                          to={`/Service-Details/${arrowData.serviceName}`}
                           className="render"
                         >
                           <IoMdArrowForward className="Arrow" />
@@ -391,7 +391,7 @@ const Home = () => {
                     </div>
                     <div className="container pt-5">
                       <div className="row">
-                        {services.slice(0,9).map((service, index) => (
+                        {services.slice(0, 9).map((service, index) => (
                           <div key={index} className="col-md-4 col-6 mt-3 mb-4">
                             <div className="text-center">
                               <img
@@ -524,19 +524,19 @@ const Home = () => {
                       </div>
                     ))}
 
-                     {/* Show "View All" button if there are more than 4 videos */}
-                  {posts.length > 4 && (
-                   <div className="view-all-feed">
-                    <Link
-                      onClick={handleActiveChange}
-                      to={"/Socialfeed"}
-                      className="All-Feed"
-                    >
-                      View all Social Feed
-                    </Link>
-                    </div>
-                   
-                  )}
+                    {/* Show "View All" button if there are more than 4 videos */}
+                    {posts.length > 4 && (
+                      <div className="view-all-feed">
+                        <Link
+                          onClick={handleActiveChange}
+                          to={"/Socialfeed"}
+                          className="All-Feed"
+                        >
+                          View all Social Feed
+                        </Link>
+                      </div>
+
+                    )}
                   </div>
                 </div>
               </div>

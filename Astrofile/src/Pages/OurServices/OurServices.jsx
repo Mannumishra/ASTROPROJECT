@@ -29,6 +29,7 @@ const OurServices = () => {
   };
 
   const [services, setServices] = useState([])
+  const [arrowData, setArrowData] = useState([])
 
   const getServiceData = async () => {
     try {
@@ -44,7 +45,20 @@ const OurServices = () => {
   useEffect(() => {
     getServiceData()
   }, [])
-  
+
+
+  const getArrowData = async () => {
+    try {
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-kundali-service")
+      setArrowData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getArrowData()
+  }, [])
   return (
     <>
       <Helmet>
@@ -100,7 +114,11 @@ const OurServices = () => {
                         <p>Order Hard Copy of Kundali (Birth Chart) for convenient reference, personal keepsake, detailed layout and easy annotations ₹1100</p>
                       </div>
                       <div className="arrowrender">
-                        <Link onClick={handleActiveChange} to={"/Kundali"} className="render">
+                        <Link
+                          onClick={handleActiveChange}
+                          to={`/Service-Details/${arrowData.serviceName}`}
+                          className="render"
+                        >
                           <IoMdArrowForward className="Arrow" />
                         </Link>
                       </div>
@@ -120,8 +138,8 @@ const OurServices = () => {
                               <span className="text-danger">₹{service.sericeFinalPrice}</span>
                             </p>
                             <Link to={`/Service-Details/${service.serviceName}`}>
-                                <button className="servicedetails">Get Details</button>
-                              </Link>
+                              <button className="servicedetails">Get Details</button>
+                            </Link>
                           </div>
                         </div>
                       ))}
