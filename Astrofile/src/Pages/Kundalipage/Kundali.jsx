@@ -3,11 +3,11 @@ import { Helmet } from "react-helmet";
 import "./Kundali.css";
 import "./GetAddress.css";
 import { FaAngleRight } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const Kundali = () => {
-  
+  const navigate = useNavigate()
   const [stepOne, setStepOne] = useState(true);
   const [gender, setGender] = useState(null);
   const [data, setData] = useState({});
@@ -18,7 +18,7 @@ const Kundali = () => {
   const { name } = useParams();
 
   const [formData, setFormData] = useState({
-    serviceId:"",
+    serviceId: "",
     name: "",
     phone: "",
     email: "",
@@ -49,7 +49,7 @@ const Kundali = () => {
       setFormData((prevData) => ({
         ...prevData,
         amount: res.data.data.sericeFinalPrice,
-        serviceId:res.data.data._id
+        serviceId: res.data.data._id
       }));
     } catch (error) {
       console.log(error);
@@ -65,6 +65,20 @@ const Kundali = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  // State for time selection
+  const [hour, setHour] = useState("12");
+  const [minute, setMinute] = useState("00");
+  const [ampm, setAmpm] = useState("AM");
+
+  // Handle time changes and store formatted time
+  const handleTimeChange = () => {
+    const formattedTime = `${hour}:${minute} ${ampm}`;
+    setFormData((prevData) => ({
+      ...prevData,
+      birthTime: formattedTime,
     }));
   };
 
@@ -102,6 +116,7 @@ const Kundali = () => {
           if (verificationResponse.data.success) {
             alert('Payment successful and verified!');
             setSubmissionStatus("Form submitted and payment successful!");
+            navigate('/success');
           } else {
             alert('Payment verification failed. Please try again.');
             setSubmissionStatus("Payment verification failed.");
@@ -119,13 +134,13 @@ const Kundali = () => {
 
 
   const sendTrue = () => {
-    if(!formData.name || !formData.email || !formData.phone || !formData.gender || !formData.maritalStatus || !formData.dateOfBirth || !formData.birthTime || !formData.countryOrstate || !formData.place ){
+    if (!formData.name || !formData.email || !formData.phone || !formData.gender || !formData.maritalStatus || !formData.dateOfBirth || !formData.birthTime || !formData.countryOrstate || !formData.place) {
       return alert("Please Fill the required field")
     }
     setStepOne(false)
   }
 
-  
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -233,7 +248,50 @@ const Kundali = () => {
                           </div>
                           <div className="col-md-12 namefield mb-2">
                             <label className="form-label">Time<sup className="text-danger">*</sup></label>
-                            <input type="time" onChange={handleChange} name="birthTime" className="form-control form-input" required />
+                            <div className="d-flex " style={{marginRight:"140px"}}>
+                              {/* Hour Dropdown */}
+                              <select
+                                value={hour}
+                                onChange={(e) => {
+                                  setHour(e.target.value);
+                                  handleTimeChange();
+                                }}
+                                className=" form-input me-2"
+                              >
+                                {Array.from({ length: 12 }, (_, i) => {
+                                  const hourValue = (i + 1).toString().padStart(2, '0');
+                                  return <option key={hourValue} value={hourValue}>{hourValue}</option>;
+                                })}
+                              </select>
+
+                              {/* Minute Dropdown */}
+                              <select
+                                value={minute}
+                                onChange={(e) => {
+                                  setMinute(e.target.value);
+                                  handleTimeChange();
+                                }}
+                                className="form-input me-2"
+                              >
+                                {Array.from({ length: 60 }, (_, i) => {
+                                  const minuteValue = i.toString().padStart(2, '0');
+                                  return <option key={minuteValue} value={minuteValue}>{minuteValue}</option>;
+                                })}
+                              </select>
+
+                              {/* AM/PM Selector */}
+                              <select
+                                value={ampm}
+                                onChange={(e) => {
+                                  setAmpm(e.target.value);
+                                  handleTimeChange();
+                                }}
+                                className=" form-input me-5"
+                              >
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                              </select>
+                            </div>
                           </div>
                           <div className="col-md-12 namefield mb-2">
                             <label className="form-label">Country & State<sup className="text-danger">*</sup></label>

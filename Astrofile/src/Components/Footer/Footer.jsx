@@ -5,28 +5,60 @@ import { FaTwitter, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2"; // Import SweetAlert2
+
 
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateEmail(email)) {
-      setSubmitted(true);
-      setError("");
-      // Handle email submission logic here
-      console.log("Email submitted:", email);
-      setEmail(""); // Clear the input field after submission
-    } else {
-      setError("Please enter a valid email address.");
-    }
-  };
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateEmail(email)) {
+      setSubmitted(true);
+      setError("");
+      try {
+        const response = await axios.post("https://www.api.vedicjyotishe.com/api/create-newsletter", { email });
+        console.log("Server response:", response.data);
+        setEmail("");
+        Swal.fire({
+          icon: 'success',
+          title: 'Subscribed!',
+          text: 'Thank you for subscribing to our newsletter.',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } catch (err) {
+        console.error("Error submitting email:", err);
+        setError("There was an issue submitting your email. Please try again later.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'There was an issue submitting your email. Please try again later.',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      }
+    } else {
+      setError("Please enter a valid email address.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email address.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    }
+  };
+
+
 
   return (
     <>
@@ -134,6 +166,7 @@ const Footer = () => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
 
                     <button type="submit" className="submit-btn">
@@ -157,7 +190,7 @@ const Footer = () => {
               }
               className="Linkcss"
             >
-             <b>Digi India Solutions</b>
+              <b>Digi India Solutions</b>
             </Link>{" "}
           </p>
         </div>

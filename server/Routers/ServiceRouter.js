@@ -1,4 +1,4 @@
-const { createService, getService, getServiceById, deleteService, updateService, getServiceByName } = require("../Controllers/ServiceController")
+const { createService, getService, getServiceById, deleteService, updateService, getServiceByName, getarrowData } = require("../Controllers/ServiceController")
 const upload = require("../MiddleWare/Multer")
 
 const ServiceRouter = require("express").Router()
@@ -13,6 +13,7 @@ ServiceRouter.put("/update-service/:id", upload.fields([
 ]), updateService)
 
 ServiceRouter.get("/get-service", getService)
+ServiceRouter.get("/get-kundali-service", getarrowData)
 ServiceRouter.get("/get-single-service/:id", getServiceById)
 ServiceRouter.get("/get-service-by-name/:name", getServiceByName)
 ServiceRouter.delete("/delete-service/:id", deleteService)

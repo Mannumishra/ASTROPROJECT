@@ -13,6 +13,8 @@ const ServiceRouter = require("./Routers/ServiceRouter")
 const InqueryRouter = require("./Routers/InqueryRouter")
 const ContactRouter = require("./Routers/ContactRouter")
 const TagLineRouter = require("./Routers/TagLineRouter")
+const NewsLetterRouter = require("./Routers/NewsRoutes")
+const GetInTouchRouter = require("./Routers/GetInTouchRouter")
 
 const app = express()
 
@@ -36,6 +38,8 @@ app.use("/api", ServiceRouter)
 app.use("/api", InqueryRouter)
 app.use("/api", ContactRouter)
 app.use("/api", TagLineRouter)
+app.use("/api", NewsLetterRouter)
+app.use("/api", GetInTouchRouter)
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is Running at ${process.env.PORT}`)

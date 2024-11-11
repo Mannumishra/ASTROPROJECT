@@ -14,6 +14,7 @@ import Blogdes from './Pages/BlogDes/Blogdes';
 import OurServices from './Pages/OurServices/OurServices';
 import GetAddress from './Pages/Kundalipage/GetAddress';
 import Socialfeed from './Pages/SocialFeed/Socialfeed';
+import SuccessPage from './Pages/SuccessPage/SuccessPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/OurServices" element={<OurServices />} />
         <Route path="/GetAddress" element={<GetAddress />} />
         <Route path="/Socialfeed" element={<Socialfeed />} />
+        <Route path="/success" element={<SuccessPage />} />
       </Routes>
     <Footer />
   </BrowserRouter>

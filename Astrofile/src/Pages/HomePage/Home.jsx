@@ -13,6 +13,7 @@ import AOS from "aos"; // Ensure you import AOS if you're using it
 import axios from "axios";
 
 const Home = () => {
+  const [arrowData ,setArrowData] = useState([])
   const [day, setDay] = useState([]);
   const getDayData = async () => {
     try {
@@ -129,7 +130,7 @@ const Home = () => {
       const res = await axios.get(
         "https://www.api.vedicjyotishe.com/api/get-all-vedio"
       );
-      console.log(res);
+      // console.log(res);
       setPosts(res.data.data);
     } catch (error) {
       console.log(error);
@@ -145,6 +146,34 @@ const Home = () => {
     return `https://www.youtube.com/embed/${videoId}`;
   };
 
+  const getArrowData = async()=>{
+    try {
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-kundali-service")
+      setArrowData(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    getArrowData()
+  },[])
+
+
+  const [tagline ,setTagline] = useState([])
+
+  const getTagLine = async()=>{
+    try {
+      const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-tagline")
+      setTagline(res.data.data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(()=>{
+    getTagLine()
+  },[])
   return (
     <>
       <section>
@@ -167,10 +196,7 @@ const Home = () => {
                 scrollamount="5"
                 loop="infinite"
               >
-                Unlock the Power of the Cosmos 🌠 - Dive Into Your Vedic
-                Jyotishe Journey , Your Guide to the Stars 🌟 - Navigate Life
-                with Vedic Jyotishe Wisdom , Align with the Stars ✨ - Explore
-                Your Destiny Through Vedic Jyotishe
+              {tagline.tagLine}
               </marquee>
             </div>
           </div>
@@ -356,7 +382,7 @@ const Home = () => {
                       <div className="arrowrender">
                         <Link
                           onClick={handleActiveChange}
-                          to={"/Kundali"}
+                          to={`Service-Details/${arrowData.serviceName}`}
                           className="render"
                         >
                           <IoMdArrowForward className="Arrow" />

@@ -278,6 +278,25 @@ const deleteService = async (req, res) => {
 };
 
 
+const getarrowData = async(req,res)=>{
+    try {
+        const data = await Service.findOne({arrow:"True"})
+        if(!data){
+            return res.status(404).json({
+                success:false,
+                message:"REcord Not Found"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            message:"Record Found",
+            data:data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
-    createService, getService, getServiceById, updateService, deleteService, getServiceByName
+    createService, getService, getServiceById, updateService, deleteService, getServiceByName ,getarrowData
 };

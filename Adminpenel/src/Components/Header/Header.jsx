@@ -50,6 +50,16 @@ const Header = () => {
               </Link>
             </li>
             <li>
+              <Link to="/all-newsletter-query" onClick={handletoggleBtn}>
+                <i className="fa-brands fa-cc-discover"></i> News Letter Query
+              </Link>
+            </li>
+            <li>
+              <Link to="/all-contact-query" onClick={handletoggleBtn}>
+                <i className="fa-brands fa-cc-discover"></i> Contact Inquery
+              </Link>
+            </li>
+            <li>
               <Link to="/all-panchang" onClick={handletoggleBtn}>
                 <i className="fa-solid fa-tag"></i> Manage Panchang
               </Link>

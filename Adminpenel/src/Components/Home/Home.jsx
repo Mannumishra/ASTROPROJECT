@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import Header from '../Header/Header'
 import Dashboard from '../../Pages/Dashboard/Dashboard'
 import EditOrder from '../../Pages/ServiceInquery/EditOrder'
-import AllUsers from '../../Pages/Users/AllUsers'
 import AllDay from '../../Pages/Day/AllDay'
 import AddDay from '../../Pages/Day/AddDay'
 import EditDay from '../../Pages/Day/EditDay'
@@ -29,6 +28,8 @@ import AllTagline from '../../Pages/TagLine/AllTagline'
 import AddTagline from '../../Pages/TagLine/AddTagline'
 import EditTagline from '../../Pages/TagLine/EditTagline'
 import AllServiceInquery from '../../Pages/ServiceInquery/AllServiceInquery'
+import Newsletter from '../../Pages/Newsletter/Newsletter'
+import GetInTouch from '../../Pages/GetInTouch/GetInTouch'
 
 const Home = () => {
   const isLoggedIn = sessionStorage.getItem("login");
@@ -56,7 +57,10 @@ const Home = () => {
 
 
                 {/* --- Orders --- */}
-                <Route path={"/all-users"} element={<AllUsers />} />
+                <Route path={"/all-contact-query"} element={<GetInTouch />} />
+
+                <Route path={"/all-newsletter-query"} element={<Newsletter />} />
+
 
                 {/* --- Vouchers --- */}
                 <Route path={"/all-service"} element={<AllService />} />   {/* // All Vouchers */}

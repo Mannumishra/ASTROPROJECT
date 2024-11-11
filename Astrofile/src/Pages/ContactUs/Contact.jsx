@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import axios
 import "./Contact.css";
 import { FaAngleRight, FaPhoneAlt } from "react-icons/fa";
 import { IoLocation, IoMail } from "react-icons/io5";
 import Designstar from "../../Assets/DesignStar.png";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const Contact = () => {
   useEffect(() => {
@@ -15,9 +17,61 @@ const Contact = () => {
   }, []);
 
   const [active, setActive] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    comment: "",
+  });
 
   const handleActiveChange = () => {
     setActive(!active);
+  };
+
+  // Handle form data change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if all required fields are filled
+    if (!formData.name || !formData.email || !formData.phone || !formData.comment) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill in all fields.",
+      });
+      return;
+    }
+
+    try {
+      // Make API request to send form data
+      const response = await axios.post("https://www.api.vedicjyotishe.com/api/send-record", formData);
+      
+      if (response.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Thank You!",
+          text: "Your message has been sent successfully.",
+        });
+        setFormData({ name: "", email: "", phone: "", comment: "" }); // Clear the form after submission
+      } else {
+        throw new Error("Failed to send message");
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "There was an issue sending your message. Please try again later.",
+      });
+    }
   };
 
   return (
@@ -122,13 +176,16 @@ const Contact = () => {
                 </p>
               </div>
               <div className="col-md-6">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <input
                         type="text"
                         className="form-control"
                         placeholder="Name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -137,6 +194,9 @@ const Contact = () => {
                         type="email"
                         className="form-control"
                         placeholder="Email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
                         required
                       />
                     </div>
@@ -146,6 +206,9 @@ const Contact = () => {
                       type="number"
                       className="form-control"
                       placeholder="Phone number"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
                       required
                     />
                   </div>
@@ -154,6 +217,10 @@ const Contact = () => {
                       className="form-control"
                       placeholder="Comment"
                       rows="5"
+                      name="comment"
+                      value={formData.comment}
+                      onChange={handleChange}
+                      required
                     ></textarea>
                   </div>
                   <button type="submit" className="submit-btn">
