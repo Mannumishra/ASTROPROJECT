@@ -97,7 +97,7 @@ const Header = () => {
                     {
                       service.map((item, index) =>
                         <li className="dropdown-item">
-                          <Link to={`Service-Details/${item.serviceName}`}>{item.serviceName}</Link>
+                          <Link onClick={() => handleLinkClick("/Service-Details")} to={`Service-Details/${item.serviceName}`}>{item.serviceName}</Link>
                         </li>
                       )
                     }

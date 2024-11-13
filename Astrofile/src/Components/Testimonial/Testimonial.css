@@ -117,7 +117,7 @@
   .testimonialDesc {
     max-width: 100%; /* Allow full width for description */
     margin-left: 0; /* Reset left margin */
-    text-align: center; /* Center-align text on smaller screens */
+    text-align: justify; /* Center-align text on smaller screens */
     padding-top: 1rem;
   }
 
@@ -139,12 +139,13 @@
   }
   .testimonialDesc {
     padding: 0; /* Remove extra padding on mobile */
-    text-align: center;
+    text-align: justify;
   }
 
 
   .testimonialName h2, .testimonialName p {
     text-align: center; /* Center text */
+    font-size: .75rem;
   }
 
   .sidearrow img {
