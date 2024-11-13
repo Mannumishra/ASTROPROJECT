@@ -452,6 +452,11 @@
     -webkit-line-clamp: 2; /* Limit to 2 lines on smaller screens */
   }
 
+ .detail-blog-btn {
+  font-size: 0.9rem; 
+  text-align: center;
+  }
+
   /* Button adjustments for mobile */
   .view-all-feed {
     display: flex;
@@ -462,8 +467,6 @@
 
   .All-Feed {
     font-size: 0.9rem; /* Reduce font size for button */
-    padding: 0.4rem 0.7rem; /* Adjust padding */
-    width: 80%; /* Make button wider for easy tap access */
     text-align: center;
   }
 
@@ -481,15 +484,22 @@
     width: 100%;
   }
 
+  .service-name h5 {
+    font-size: 0.75rem;
+  }
+
   .card-body p {
     font-size: 0.85rem; /* Even smaller for extra-small screens */
       padding: 0 !important;
   }
 
+  .detail-blog-btn {
+    font-size: 0.9rem; 
+    text-align: center;
+    }
+
   .All-Feed {
     font-size: 0.85rem;
-    padding: 0.3rem 0.6rem;
-    width: 100%; /* Full-width button */
   }
 
   .card-body .card-description {
