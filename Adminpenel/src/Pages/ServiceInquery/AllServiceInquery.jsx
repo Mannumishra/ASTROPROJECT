@@ -66,6 +66,17 @@ const AllServiceInquiry = () => {
         }
     };
 
+    const deleteRecord = async(id)=>{
+        try {
+            const res = await axios.delete("https://www.api.vedicjyotishe.com/api/delete-service-inquery/" +id)
+            if(res.status===200){
+                toast.success("Inquery Delete Successfully")
+                getApiData()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
             <ToastContainer />
@@ -101,6 +112,7 @@ const AllServiceInquiry = () => {
                             {/* <th scope="col">Order Status</th> */}
                             <th scope="col">Payment Status</th>
                             <th scope="col">Download PDF</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,6 +130,7 @@ const AllServiceInquiry = () => {
                                     <td>
                                         <button className='btn btn-success' onClick={() => generatePDF(item)}>Download PDF</button>
                                     </td>
+                                    <td><button className='btn btn-danger' onClick={()=>deleteRecord(item._id)}>Delete</button></td>
                                 </tr>
                             ))
                         ) : (
