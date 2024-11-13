@@ -402,7 +402,9 @@ const Home = () => {
                                 className="img-fluid mb-2"
                                 style={{ height: "80px" }}
                               />
+                              <div className="service-name">
                               <h5>{service.serviceName}</h5>
+                              </div>
                               <p>
                                 <span className="text-muted">
                                   <s>₹{service.sericePrice}</s>

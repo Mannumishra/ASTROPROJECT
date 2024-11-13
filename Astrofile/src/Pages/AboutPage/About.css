@@ -27,6 +27,7 @@
   height: 100%;
   position: relative;
   animation: rotate 8s linear infinite;
+  overflow: hidden;
 }
 
 @keyframes rotate {
@@ -61,6 +62,7 @@
 
   .Rashifal {
     padding: 2rem; /* Reduce padding */
+    overflow: hidden;
   }
 
   .RashifalText {
@@ -80,6 +82,7 @@
 
   .Rashifal {
     padding: 1.75rem; /* Further reduce padding for mobile */
+    overflow: hidden;
   }
 
   .RashifalText {

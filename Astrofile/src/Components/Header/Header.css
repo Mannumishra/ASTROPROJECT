@@ -93,6 +93,8 @@
 
 .dropdown-menu {
   background: white;
+  left: -50px !important;
+  padding: 0.50rem !important;
 }
 
 
@@ -100,7 +102,7 @@
   text-decoration: none;
   color: var(--text-color);
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .dropdown-menu .dropdown-item a:hover {
@@ -168,8 +170,9 @@
   }
 
   .chat-now-button {
-    padding: 0.50rem;
+    /* padding: 0.50rem; */
     text-align: center;
     justify-content: center;
+    margin: 0 !important;
   }
 }
