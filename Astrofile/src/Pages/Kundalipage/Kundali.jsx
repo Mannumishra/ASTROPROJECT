@@ -98,7 +98,7 @@ const Kundali = () => {
       const { orderId, amount } = inquiryRes.data.data;
 
       const options = {
-        key: 'rzp_live_uPsGOmFh9PzBLG',
+        key: 'rzp_live_uPsGOmFh9PzBLG', 
         amount: amount,
         currency: 'INR',
         name: 'Your Service Name',
