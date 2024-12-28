@@ -211,6 +211,7 @@ const Home = () => {
         </div>
       </section>
 
+
       <section>
         <div className="container-fluid">
           <div className="row">
