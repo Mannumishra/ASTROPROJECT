@@ -8,4 +8,4 @@ const transporte = nodemailer.createTransport({
     }
 })
 
-module.exports = transporte
+module.exports = {transporte}

@@ -1,6 +1,7 @@
 const Razorpay = require('razorpay');
 const InqueryService = require("../Models/InqueryServiceModel");
 const crypto = require('crypto');
+const { transporte } = require('../Utils/Nodemailer');
 // Initialize Razorpay
 const razorpay = new Razorpay({
     key_id: process.env.RAZOR_PAY_API_KEY, // Replace with your Razorpay key id
@@ -11,29 +12,7 @@ const razorpay = new Razorpay({
 const createInqueryService = async (req, res) => {
     try {
         console.log(req.body)
-        const {
-            serviceId,
-            name,
-            phone,
-            email,
-            gender,
-            maritalStatus,
-            dateOfBirth,
-            birthTime,
-            countryOrstate,
-            place,
-            longitude,
-            latitude,
-            comment,
-            address,
-            apartment,
-            city,
-            state,
-            country,
-            postalCode,
-            additionalInfo,
-            amount // Make sure to include amount in the request body for Razorpay payment
-        } = req.body;
+        const { serviceId, name, phone, email, gender, maritalStatus, dateOfBirth, birthTime, countryOrstate, place, longitude, latitude, comment, address, apartment, city, state, country, postalCode, additionalInfo, amount } = req.body;
 
         const errorMessage = [];
 
@@ -93,17 +72,67 @@ const createInqueryService = async (req, res) => {
             latitude,
             comment,
             address,
-            apartment, // Optional
+            apartment,
             city,
             state,
             country,
             postalCode,
-            additionalInfo, // Optional
-            paymentStatus: "Pending", // Set initial payment status
-            orderId: order.id // Store the order ID for future reference
+            additionalInfo,
+            paymentStatus: "Pending",
+            orderId: order.id
         });
 
         await newInquiry.save();
+        const mailOptions = {
+            from: "vedicjyotishe@outlook.com",
+            to: email,
+            subject: "Inquiry Created Successfully",
+            html: `
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>Vedic Jyotishe</title>
+                    </head>
+                    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
+                        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
+                            <!-- Header -->
+                            <div style="background-color: #E05F13; text-align: center; padding: 20px;">
+                                <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
+                            </div>
+        
+                            <!-- Body -->
+                            <div style="padding: 20px; color: #333333;">
+                                <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Inquiry, ${name}!</h1>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    We have received your inquiry at <strong>Vedic Jyotishe</strong>. Our expert astrologers are here to provide you with the most accurate and personalized insights into your life's journey.
+                                </p>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    Your inquiry ID is: <strong>${order.id}</strong>. Please keep this ID for future reference.
+                                </p>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    If you have any questions or need further assistance, feel free to reach out to us at
+                                    <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
+                                    or call us at <strong>+91 6366052167</strong>.
+                                </p>
+                            </div>
+        
+                            <!-- Footer -->
+                            <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
+                                <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
+                                <p>
+                                    <a href="https://vedicjyotishe.com/privacy-policy" style="color: #ffffff; text-decoration: none;">Privacy Policy</a> |
+                                    <a href="https://vedicjyotishe.com/terms" style="color: #ffffff; text-decoration: none;">Terms & Conditions</a>
+                                </p>
+                            </div>
+                        </div>
+                    </body>
+                </html>
+            `
+        };
+
+        await transporte.sendMail(mailOptions);
+
+
 
         res.status(201).json({
             success: true,
@@ -179,6 +208,55 @@ const verifyPayment = async (req, res) => {
         inquiry.paymentStatus = "Complete"
         await inquiry.save()
         console.log("my updated", inquiry)
+
+        const mailOptions = {
+            from: 'vedicjyotishe@outlook.com',
+            to: inquiry.email,
+            subject: 'Payment Received Successfully',
+            html: `
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <title>Vedic Jyotishe</title>
+                    </head>
+                    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
+                        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
+                            <!-- Header -->
+                            <div style="background-color: #E05F13; text-align: center; padding: 20px;">
+                                <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
+                            </div>
+
+                            <!-- Body -->
+                            <div style="padding: 20px; color: #333333;">
+                                <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Payment, ${inquiry.name}!</h1>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    We have successfully received your payment for the inquiry ID: <strong>${inquiry.orderId}</strong>.
+                                </p>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    Our expert astrologers will review your details and reach out to you soon with personalized insights.
+                                </p>
+                                <p style="line-height: 1.6; font-size: 16px;">
+                                    If you have any questions, feel free to contact us at
+                                    <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
+                                    or call us at <strong>+91 6366052167</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Footer -->
+                            <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
+                                <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
+                                <p>
+                                    <a href="https://vedicjyotishe.com/privacy-policy" style="color: #ffffff; text-decoration: none;">Privacy Policy</a> |
+                                    <a href="https://vedicjyotishe.com/terms" style="color: #ffffff; text-decoration: none;">Terms & Conditions</a>
+                                </p>
+                            </div>
+                        </div>
+                    </body>
+                </html>
+            `,
+        };
+
+        await transporte.sendMail(mailOptions);
 
         return res.status(200).json({
             success: true,
