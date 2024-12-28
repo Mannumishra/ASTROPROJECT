@@ -83,50 +83,50 @@ const createInqueryService = async (req, res) => {
         });
 
         await newInquiry.save();
-        const mailOptions = {
-            from: "vedicjyotishe@outlook.com",
-            to: email,
-            subject: "Inquiry Created Successfully",
-            html: `
-                <!DOCTYPE html>
-                <html>
-                    <head>
-                        <title>Vedic Jyotishe</title>
-                    </head>
-                    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
-                        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
-                            <!-- Header -->
-                            <div style="background-color: #E05F13; text-align: center; padding: 20px;">
-                                <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
-                            </div>
+        // const mailOptions = {
+        //     from: "vedicjyotishe@outlook.com",
+        //     to: email,
+        //     subject: "Inquiry Created Successfully",
+        //     html: `
+        //         <!DOCTYPE html>
+        //         <html>
+        //             <head>
+        //                 <title>Vedic Jyotishe</title>
+        //             </head>
+        //             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
+        //                 <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
+        //                     <!-- Header -->
+        //                     <div style="background-color: #E05F13; text-align: center; padding: 20px;">
+        //                         <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
+        //                     </div>
         
-                            <!-- Body -->
-                            <div style="padding: 20px; color: #333333;">
-                                <h1 style="color: #E05F13; font-size: 24px;">Thank you for reaching out, ${name}!</h1>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                   We noticed your interest in our <strong>Vedic Jyotishe</strong> services. Kindly note that your payment is still pending. Our expert astrologers are ready to provide you with accurate and personalized insights to guide you on your life journey.
-                                </p>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                    Your inquiry ID is: <strong>${order.id}</strong>. Please mention this ID for any future correspondence.
-                                </p>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                    If you have any questions or require assistance, don’t hesitate to contact us at
-                                    <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
-                                     or call us at <strong>+91 6366052167</strong>.
-                                </p>
-                            </div>
+        //                     <!-- Body -->
+        //                     <div style="padding: 20px; color: #333333;">
+        //                         <h1 style="color: #E05F13; font-size: 24px;">Thank you for reaching out, ${name}!</h1>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                            We noticed your interest in our <strong>Vedic Jyotishe</strong> services. Kindly note that your payment is still pending. Our expert astrologers are ready to provide you with accurate and personalized insights to guide you on your life journey.
+        //                         </p>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                             Your inquiry ID is: <strong>${order.id}</strong>. Please mention this ID for any future correspondence.
+        //                         </p>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                             If you have any questions or require assistance, don’t hesitate to contact us at
+        //                             <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
+        //                              or call us at <strong>+91 6366052167</strong>.
+        //                         </p>
+        //                     </div>
         
-                            <!-- Footer -->
-                            <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
-                                <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
-                            </div>
-                        </div>
-                    </body>
-                </html>
-            `
-        };
+        //                     <!-- Footer -->
+        //                     <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
+        //                         <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
+        //                     </div>
+        //                 </div>
+        //             </body>
+        //         </html>
+        //     `
+        // };
 
-        await transporte.sendMail(mailOptions);
+        // await transporte.sendMail(mailOptions);
 
 
 
@@ -205,50 +205,50 @@ const verifyPayment = async (req, res) => {
         await inquiry.save()
         console.log("my updated", inquiry)
 
-        const mailOptions = {
-            from: 'vedicjyotishe@outlook.com',
-            to: inquiry.email,
-            subject: 'Payment Received Successfully',
-            html: `
-                <!DOCTYPE html>
-                <html>
-                    <head>
-                        <title>Vedic Jyotishe</title>
-                    </head>
-                    <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
-                        <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
-                            <!-- Header -->
-                            <div style="background-color: #E05F13; text-align: center; padding: 20px;">
-                                <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
-                            </div>
+        // const mailOptions = {
+        //     from: 'vedicjyotishe@outlook.com',
+        //     to: inquiry.email,
+        //     subject: 'Payment Received Successfully',
+        //     html: `
+        //         <!DOCTYPE html>
+        //         <html>
+        //             <head>
+        //                 <title>Vedic Jyotishe</title>
+        //             </head>
+        //             <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f7f7;">
+        //                 <div style="max-width: 600px; margin: 20px auto; background: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
+        //                     <!-- Header -->
+        //                     <div style="background-color: #E05F13; text-align: center; padding: 20px;">
+        //                         <img src="https://vedicjyotishe.com/static/media/BrandLogo.2406cfa9ae7813baf227.png" alt="Vedic Jyotishe Logo" style="max-width: 150px;">
+        //                     </div>
 
-                            <!-- Body -->
-                            <div style="padding: 20px; color: #333333;">
-                                <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Payment, ${inquiry.name}!</h1>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                    We have successfully received your payment for the Order ID: <strong>${inquiry.orderId}</strong>.
-                                </p>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                    Our expert astrologers will review your details and reach out to you soon with personalized insights.
-                                </p>
-                                <p style="line-height: 1.6; font-size: 16px;">
-                                    If you have any questions, feel free to contact us at
-                                    <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
-                                    or call us at <strong>+91 6366052167</strong>.
-                                </p>
-                            </div>
+        //                     <!-- Body -->
+        //                     <div style="padding: 20px; color: #333333;">
+        //                         <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Payment, ${inquiry.name}!</h1>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                             We have successfully received your payment for the Order ID: <strong>${inquiry.orderId}</strong>.
+        //                         </p>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                             Our expert astrologers will review your details and reach out to you soon with personalized insights.
+        //                         </p>
+        //                         <p style="line-height: 1.6; font-size: 16px;">
+        //                             If you have any questions, feel free to contact us at
+        //                             <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
+        //                             or call us at <strong>+91 6366052167</strong>.
+        //                         </p>
+        //                     </div>
 
-                            <!-- Footer -->
-                            <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
-                                <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
-                            </div>
-                        </div>
-                    </body>
-                </html>
-            `,
-        };
+        //                     <!-- Footer -->
+        //                     <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
+        //                         <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
+        //                     </div>
+        //                 </div>
+        //             </body>
+        //         </html>
+        //     `,
+        // };
 
-        await transporte.sendMail(mailOptions);
+        // await transporte.sendMail(mailOptions);
 
         return res.status(200).json({
             success: true,
