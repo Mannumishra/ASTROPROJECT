@@ -102,27 +102,23 @@ const createInqueryService = async (req, res) => {
         
                             <!-- Body -->
                             <div style="padding: 20px; color: #333333;">
-                                <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Inquiry, ${name}!</h1>
+                                <h1 style="color: #E05F13; font-size: 24px;">Thank you for reaching out, ${name}!</h1>
                                 <p style="line-height: 1.6; font-size: 16px;">
-                                    We have received your inquiry at <strong>Vedic Jyotishe</strong>. Our expert astrologers are here to provide you with the most accurate and personalized insights into your life's journey.
+                                   We noticed your interest in our <strong>Vedic Jyotishe</strong> services. Kindly note that your payment is still pending. Our expert astrologers are ready to provide you with accurate and personalized insights to guide you on your life journey.
                                 </p>
                                 <p style="line-height: 1.6; font-size: 16px;">
-                                    Your inquiry ID is: <strong>${order.id}</strong>. Please keep this ID for future reference.
+                                    Your inquiry ID is: <strong>${order.id}</strong>. Please mention this ID for any future correspondence.
                                 </p>
                                 <p style="line-height: 1.6; font-size: 16px;">
-                                    If you have any questions or need further assistance, feel free to reach out to us at
+                                    If you have any questions or require assistance, don’t hesitate to contact us at
                                     <a href="mailto:VedicJyotishe@outlook.com" style="color: #E05F13; text-decoration: none;">VedicJyotishe@outlook.com</a>
-                                    or call us at <strong>+91 6366052167</strong>.
+                                     or call us at <strong>+91 6366052167</strong>.
                                 </p>
                             </div>
         
                             <!-- Footer -->
                             <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
                                 <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
-                                <p>
-                                    <a href="https://vedicjyotishe.com/privacy-policy" style="color: #ffffff; text-decoration: none;">Privacy Policy</a> |
-                                    <a href="https://vedicjyotishe.com/terms" style="color: #ffffff; text-decoration: none;">Terms & Conditions</a>
-                                </p>
                             </div>
                         </div>
                     </body>
@@ -230,7 +226,7 @@ const verifyPayment = async (req, res) => {
                             <div style="padding: 20px; color: #333333;">
                                 <h1 style="color: #E05F13; font-size: 24px;">Thank You for Your Payment, ${inquiry.name}!</h1>
                                 <p style="line-height: 1.6; font-size: 16px;">
-                                    We have successfully received your payment for the inquiry ID: <strong>${inquiry.orderId}</strong>.
+                                    We have successfully received your payment for the Order ID: <strong>${inquiry.orderId}</strong>.
                                 </p>
                                 <p style="line-height: 1.6; font-size: 16px;">
                                     Our expert astrologers will review your details and reach out to you soon with personalized insights.
@@ -245,10 +241,6 @@ const verifyPayment = async (req, res) => {
                             <!-- Footer -->
                             <div style="background-color: #333333; color: #ffffff; text-align: center; padding: 15px; font-size: 14px;">
                                 <p>&copy; 2024 Vedic Jyotishe. All Rights Reserved.</p>
-                                <p>
-                                    <a href="https://vedicjyotishe.com/privacy-policy" style="color: #ffffff; text-decoration: none;">Privacy Policy</a> |
-                                    <a href="https://vedicjyotishe.com/terms" style="color: #ffffff; text-decoration: none;">Terms & Conditions</a>
-                                </p>
                             </div>
                         </div>
                     </body>
