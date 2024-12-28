@@ -13,7 +13,8 @@ const AddMonths = () => {
         TithiTillTime: { hours: '', minutes: '', seconds: '' },
         Yog: '',
         YogTillDate: '',
-        YogTillTime: { hours: '', minutes: '', seconds: '' }
+        YogTillTime: { hours: '', minutes: '', seconds: '' },
+        whichVar :''
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -238,6 +239,18 @@ const AddMonths = () => {
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div className="col-md-3">
+                        <label htmlFor="Yog" className="form-label">Var</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="whichVar"
+                            name="whichVar"
+                            value={formData.whichVar}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
                     <div className="col-12 text-center">
                         <button type="submit" disabled={isLoading} className={`${isLoading ? 'not-allowed' : 'allowed'}`}>

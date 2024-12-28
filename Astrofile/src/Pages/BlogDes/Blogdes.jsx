@@ -29,13 +29,14 @@ const Blogdes = () => {
       top: 0,
       behavior: "smooth",
     });
-  }, []);
+  }, [id]);
 
   const [singleData, setSingleData] = useState({})
 
   const getSingleBlogData = async () => {
     try {
       const res = await axios.get("https://www.api.vedicjyotishe.com/api/get-single-blog/" + id)
+      console.log(res)
       setSingleData(res.data.data)
     } catch (error) {
       console.log(error)
@@ -43,7 +44,7 @@ const Blogdes = () => {
   }
   useEffect(() => {
     getSingleBlogData()
-  }, [])
+  }, [id])
   const [active, setActive] = useState(false);
 
   const handleActiveChange = () => {
@@ -113,10 +114,7 @@ const Blogdes = () => {
                 <img src={Designstar} alt="Design star" />
               </div>
               <div className="blogdes">
-                <h1>
-                  A few words about this blog platform, Ghost, and how this site
-                  was made
-                </h1>
+                <h1> {singleData.blogHeading} </h1>
               </div>
             </div>
           </div>
@@ -126,51 +124,15 @@ const Blogdes = () => {
           <div className="container py-3">
             <div className="col">
               <div className="blogtext py-2">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                  eu velit tempus erat egestas efficitur. In hac habitasse
-                  platea dictumst. Fusce a nunc eget ligula suscipit finibus.
-                  Aenean pharetra quis lacus at viverra.{" "}
-                </p>
-                <p>
-                  Class aptent taciti sociosqu ad litora torquent per conubia
-                  nostra, per inceptos himenaeos. Aliquam quis posuere ligula.
-                  In eu dui molestie, molestie lectus eu, semper lectus.{" "}
-                </p>
+                <p>{singleData.blogDetails}</p>
               </div>
               <div className="blogtext py-2">
-                <div className="blogtitle py-2">
-                  <h2>Next on the pipeline</h2>
-                </div>
-                <p>
-                  Duis eu velit tempus erat egestas efficitur. In hac habitasse
-                  platea dictumst. Fusce a nunc eget ligula suscipit finibus.
-                  Aenean pharetra quis lacus at viverra. Class aptent taciti
-                  sociosqu ad litora torquent per conubia nostra, per inceptos
-                  himenaeos.{" "}
-                </p>
-                <p>
-                  Morbi efficitur auctor metus, id mollis lorem pellentesque id.
-                  Nullam posuere maximus dui et fringilla.{" "}
-                </p>
-
                 <div className="blogimg py-3">
-                  <img src={BlogImg} alt="Blog Img" />
+                  <img src={`https://www.api.vedicjyotishe.com/${singleData.blogImage}`} alt="Blog Img" style={{height:"400px"}}/>
                 </div>
+                <p dangerouslySetInnerHTML={{ __html: singleData.blogDescription }}></p>
 
-                <p>
-                  Aenean pharetra quis lacus at viverra. Class aptent taciti
-                  sociosqu ad litora torquent per conubia nostra, per inceptos
-                  himenaeos. Aliquam quis posuere ligula.{" "}
-                </p>
-                <p>
-                  In eu dui molestie, molestie lectus eu, semper lectus. Proin
-                  at justo lacinia, auctor nisl et, consequat ante. Donec sit
-                  amet nisi arcu. Morbi efficitur auctor metus, id mollis lorem
-                  pellentesque id. Nullam posuere maximus dui et fringilla.
-                  Nulla non volutpat leo.{" "}
-                </p>
-                <div className="blogtitle py-2">
+                {/* <div className="blogtitle py-2">
                   <h4>A list looks like this:</h4>
                   <div className="bloglist">
                     <ul>
@@ -182,24 +144,24 @@ const Blogdes = () => {
                       <li>Third item in the list</li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className="container-fluid">
             <div className="row">
               <div className="designstar">
-                <img src={Designstar} alt="Design star" />
+                <img src={`https://www.api.vedicjyotishe.com/${singleData.blogImage}`} alt="Design star" />
               </div>
               <div className="blogdes">
                 <h1>Recommended</h1>
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section>
           <div className="container my-5">
@@ -214,7 +176,7 @@ const Blogdes = () => {
                       <p className="card-description">{item.blogDetails}</p>
                       <Link
                         onClick={handleActiveChange}
-                        to={item.link}
+                        to={`/blog-details/${item._id}`}
                         className="card-link"
                       >
                         View Details

@@ -24,6 +24,10 @@ const monthSchema = new mongoose.Schema({
     YogTill: {
         type: String,
         required: true
+    },
+    whichVar: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 

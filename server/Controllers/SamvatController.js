@@ -2,7 +2,7 @@ const Samvat = require("../Models/SamvatModel")
 
 const createSamvat = async (req, res) => {
     try {
-        const { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill } = req.body
+        const { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill, rahuKalan } = req.body
         const errorMessage = []
         if (!Vikram) errorMessage.push("Vikram Is Must Required")
         if (!Shaka) errorMessage.push("Shaka Is Must Required")
@@ -10,6 +10,7 @@ const createSamvat = async (req, res) => {
         if (!NakshatraTill) errorMessage.push("NakshatraTill Is Must Required")
         if (!Karan) errorMessage.push("Karan Is Must Required")
         if (!KaranTill) errorMessage.push("KaranTill Is Must Required")
+        if (!rahuKalan) errorMessage.push("rahuKalan Is Must Required")
 
         if (errorMessage.length > 0) {
             return res.status(400).json({
@@ -23,7 +24,7 @@ const createSamvat = async (req, res) => {
             await Samvat.deleteMany()
         }
 
-        const newRecord = new Samvat({ Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill })
+        const newRecord = new Samvat({ Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill , rahuKalan })
         await newRecord.save()
         res.status(200).json({
             success: false,
@@ -90,10 +91,10 @@ const getSingle = async (req, res) => {
 const update = async (req, res) => {
     try {
         const { id } = req.params;
-        const { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill } = req.body;
+        const { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill ,rahuKalan } = req.body;
 
         // Find the record and update
-        const updatedRecord = await Samvat.findByIdAndUpdate(id, { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill }, { new: true });
+        const updatedRecord = await Samvat.findByIdAndUpdate(id, { Vikram, Shaka, Nakshatra, NakshatraTill, Karan, KaranTill ,rahuKalan }, { new: true });
 
         if (!updatedRecord) {
             return res.status(404).json({

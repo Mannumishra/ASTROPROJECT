@@ -26,7 +26,7 @@ const Header = () => {
             </div>
           </div>
           <div className="left">
-            <a href="/" target="_blank" rel="noopener noreferrer">
+            <a href="https://vedicjyotishe.com" target="_blank" rel="noopener noreferrer">
               <i className="fa-solid fa-globe"></i>
               Go To Website
             </a>

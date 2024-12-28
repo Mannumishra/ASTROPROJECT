@@ -13,7 +13,8 @@ const EditSamvat = () => {
         NakshatraTillTime: { hours: '', minutes: '', seconds: '' },
         Karan: '',
         KaranTillDate: '',
-        KaranTillTime: { hours: '', minutes: '', seconds: '' }
+        KaranTillTime: { hours: '', minutes: '', seconds: '' },
+        rahuKalan: ''
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
@@ -278,7 +279,18 @@ const EditSamvat = () => {
                             </div>
                         </div>
                     </div>
-
+                    <div className="col-md-3">
+                        <label htmlFor="rahuKalan" className="form-label">Rahu Kalan</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="rahuKalan"
+                            name="rahuKalan"
+                            value={formData.rahuKalan}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
                     <div className="col-md-12">
                         <button type="submit" className="btn btn-primary" disabled={isLoading}>
                             {isLoading ? 'Updating...' : 'Update Samvat'}

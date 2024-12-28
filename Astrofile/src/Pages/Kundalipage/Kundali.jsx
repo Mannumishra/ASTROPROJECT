@@ -98,7 +98,7 @@ const Kundali = () => {
       const { orderId, amount } = inquiryRes.data.data;
 
       const options = {
-        key: 'rzp_live_uPsGOmFh9PzBLG', 
+        key: 'rzp_live_uPsGOmFh9PzBLG',
         amount: amount,
         currency: 'INR',
         name: 'Your Service Name',
@@ -402,6 +402,7 @@ const Kundali = () => {
                             <div className="col-md-8 ">
                               <div className="price-details">
                                 <p className="original-price">Rs.{data.sericePrice}</p>
+                                <p className="text-success">Off {data.sericeDiscount}%</p>
                                 <p className="discounted-price">Rs. {data.sericeFinalPrice}/-</p>
                               </div>
                             </div>

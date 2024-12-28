@@ -32,7 +32,7 @@ const Home = () => {
       const res = await axios.get(
         "https://www.api.vedicjyotishe.com/api/get-month"
       );
-      // console.log(res)
+      // console.log(res)  
       setMonth(res.data.data[0]);
     } catch (error) {
       console.log(error);
@@ -45,12 +45,37 @@ const Home = () => {
       const res = await axios.get(
         "https://www.api.vedicjyotishe.com/api/get-samvat"
       );
-      // console.log(res)
+      console.log(res)
       setSamvat(res.data.data[0]);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const formatDateTime = (isoDate) => {
+    if (!isoDate) {
+      return "Not Available"; // Handle undefined or null values
+    }
+
+    // Ensure the date string is valid
+    const correctedIsoDate = isoDate.replace(/:(\d)(?!\d)/g, ':0$1'); // Add leading zero to single-digit time components
+    const date = new Date(correctedIsoDate);
+
+    if (isNaN(date)) {
+      return "Invalid Date"; // Handle invalid dates gracefully
+    }
+
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    return `${day}/${month}/${year} (${hours}:${minutes}:${seconds})`;
+  };
+
+
 
   const createdAt = day.createdAt;
   const date = new Date(createdAt);
@@ -299,18 +324,18 @@ const Home = () => {
                         Tithi: <b>{month.Tithi}</b>
                       </p>
                       <p>
-                        Till: <b>{month.TithiTill}</b>
+                        Till: <b>{formatDateTime(month.TithiTill)}</b>
                       </p>
                       <hr />
                       <p>
                         Yog: <b>{month.Yog}</b>
                       </p>
                       <p>
-                        Till: <b>{month.YogTill}</b>
+                        Till: <b>{formatDateTime(month.YogTill)}</b>
                       </p>
                       <hr />
                       <p>
-                        Var: <b>Shanivar</b>
+                        Var: <b>{month.whichVar}</b>
                       </p>
                     </div>
                   </div>
@@ -334,18 +359,18 @@ const Home = () => {
                         Nakshatra: <b>{samvat.Nakshatra}</b>
                       </p>
                       <p>
-                        Till: <b>{samvat.NakshatraTill}</b>
+                        Till: <b>{formatDateTime(samvat.NakshatraTill)}</b>
                       </p>
                       <hr />
                       <p>
                         Karan: <b>{samvat.Karan}</b>
                       </p>
                       <p>
-                        Till: <b>{samvat.KaranTill}</b>
+                        Till:  <b>{formatDateTime(samvat.KaranTill)}</b>
                       </p>
                       <hr />
                       <p>
-                        Rahu Kalam: <b>12:50 am to 12:13 pm</b>
+                        Rahu Kalam: <b>{samvat.rahuKalan}</b>
                       </p>
                     </div>
                   </div>
@@ -403,12 +428,16 @@ const Home = () => {
                                 style={{ height: "80px" }}
                               />
                               <div className="service-name">
-                              <h5>{service.serviceName}</h5>
+                                <h5>{service.serviceName}</h5>
                               </div>
                               <p>
                                 <span className="text-muted">
                                   <s>₹{service.sericePrice}</s>
                                 </span>{" "}
+                                &nbsp;
+                                <span className="text-success">
+                                  Off {service.sericeDiscount}%
+                                </span>
                                 &nbsp;
                                 <span className="text-danger">
                                   ₹{service.sericeFinalPrice}
@@ -464,7 +493,7 @@ const Home = () => {
                           </p>
                           <Link
                             onClick={handleActiveChange}
-                            to={"/"}
+                            to={`/blog-details/${item._id}`}
                             className="servicedetails"
                           >
                             View Details

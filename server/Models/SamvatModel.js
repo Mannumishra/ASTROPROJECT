@@ -24,6 +24,10 @@ const samvatSchema = new mongoose.Schema({
     KaranTill: {
         type: String,
         required: true
+    },
+    rahuKalan:{
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 const Samvat = mongoose.model("Samvat", samvatSchema)
