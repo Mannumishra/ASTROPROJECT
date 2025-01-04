@@ -77,7 +77,7 @@ const Home = () => {
 
 
 
-  const createdAt = day.createdAt;
+  const createdAt = day.updatedAt;
   const date = new Date(createdAt);
   const options = {
     weekday: "long",
