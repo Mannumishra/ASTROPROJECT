@@ -52,31 +52,6 @@ const Home = () => {
     }
   };
 
-  const formatDateTime = (isoDate) => {
-    if (!isoDate) {
-      return "Not Available"; // Handle undefined or null values
-    }
-
-    // Ensure the date string is valid
-    const correctedIsoDate = isoDate.replace(/:(\d)(?!\d)/g, ':0$1'); // Add leading zero to single-digit time components
-    const date = new Date(correctedIsoDate);
-
-    if (isNaN(date)) {
-      return "Invalid Date"; // Handle invalid dates gracefully
-    }
-
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    return `${day}/${month}/${year} (${hours}:${minutes}:${seconds})`;
-  };
-
-
-
   const createdAt = day.updatedAt;
   const date = new Date(createdAt);
   const options = {
@@ -86,10 +61,6 @@ const Home = () => {
     day: "numeric",
   };
   const formattedDate = date.toLocaleDateString("en-GB", options);
-
-  // const tithiTill = month.tithiTill
-  // const mymonth = new Date(tithiTill);
-  // const formattedmonths = mymonth.toISOString().replace('T', ' ').slice(0, 19);
 
   useEffect(() => {
     getDayData();
@@ -325,15 +296,18 @@ const Home = () => {
                         Tithi: <b>{month.Tithi}</b>
                       </p>
                       <p>
-                        Till: <b>{formatDateTime(month.TithiTill)}</b>
+                        Till: <b>{month.TithiTill ? new Date(month.TithiTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
                       </p>
+
                       <hr />
                       <p>
                         Yog: <b>{month.Yog}</b>
                       </p>
                       <p>
-                        Till: <b>{formatDateTime(month.YogTill)}</b>
+                        Till: <b>{month.YogTill ? new Date(month.YogTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
                       </p>
+
+
                       <hr />
                       <p>
                         Var: <b>{month.whichVar}</b>
@@ -360,15 +334,18 @@ const Home = () => {
                         Nakshatra: <b>{samvat.Nakshatra}</b>
                       </p>
                       <p>
-                        Till: <b>{formatDateTime(samvat.NakshatraTill)}</b>
+                        Till: <b>{samvat?.NakshatraTill ? new Date(samvat.NakshatraTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
                       </p>
+
                       <hr />
                       <p>
                         Karan: <b>{samvat.Karan}</b>
                       </p>
                       <p>
-                        Till:  <b>{formatDateTime(samvat.KaranTill)}</b>
+                        Till: <b>{samvat?.KaranTill ? new Date(samvat.KaranTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
                       </p>
+
+
                       <hr />
                       <p>
                         Rahu Kalam: <b>{samvat.rahuKalan}</b>
