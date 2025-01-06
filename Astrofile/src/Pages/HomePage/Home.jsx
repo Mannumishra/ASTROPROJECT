@@ -170,6 +170,33 @@ const Home = () => {
   useEffect(() => {
     getTagLine()
   }, [])
+
+
+  function formatDateString(dateString) {
+    if (!dateString) return "Invalid Date";
+  
+    // Ensure time components are zero-padded
+    const formattedString = dateString.replace(
+      /T(\d{1,2}):(\d{1,2}):(\d{1,2})/,
+      (match, p1, p2, p3) =>
+        `T${p1.padStart(2, "0")}:${p2.padStart(2, "0")}:${p3.padStart(2, "0")}`
+    );
+  
+    const date = new Date(formattedString);
+    
+    if (isNaN(date)) return "Invalid Date"; // Check if the date is valid
+    
+    // Return the date in the desired format
+    return date.toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  }
+
   return (
     <>
       <section>
@@ -296,7 +323,7 @@ const Home = () => {
                         Tithi: <b>{month.Tithi}</b>
                       </p>
                       <p>
-                        Till: <b>{month.TithiTill ? new Date(month.TithiTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
+                        Till: <b>{formatDateString(month.TithiTill)}</b>
                       </p>
 
                       <hr />
@@ -304,7 +331,7 @@ const Home = () => {
                         Yog: <b>{month.Yog}</b>
                       </p>
                       <p>
-                        Till: <b>{month.YogTill ? new Date(month.YogTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
+                        Till: <b>{formatDateString(month.YogTill)}</b>
                       </p>
 
 
@@ -334,7 +361,7 @@ const Home = () => {
                         Nakshatra: <b>{samvat.Nakshatra}</b>
                       </p>
                       <p>
-                        Till: <b>{samvat?.NakshatraTill ? new Date(samvat.NakshatraTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
+                        Till: <b>{formatDateString(samvat.NakshatraTill)}</b>
                       </p>
 
                       <hr />
@@ -342,7 +369,7 @@ const Home = () => {
                         Karan: <b>{samvat.Karan}</b>
                       </p>
                       <p>
-                        Till: <b>{samvat?.KaranTill ? new Date(samvat.KaranTill.replace(/T(\d{1}):(\d{1}):(\d{1})/, 'T0$1:0$2:0$3')).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : 'Invalid Date'}</b>
+                        Till: <b>{formatDateString(samvat.KaranTill)}</b>
                       </p>
 
 
